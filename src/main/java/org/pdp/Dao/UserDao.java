@@ -14,7 +14,7 @@ import java.util.List;
 public class UserDao {
     private final DatabaseConfig databaseConfig;
     private static final String GET_USER_LIST = "select * from read_users()";
-    private static final String INSERT_USER = "select * from create_user(i_username := ?, i_phone_number := ?, i_password := ?, i_email := ?)";
+    private static final String INSERT_USER = "select * from create_user(i_username := ?, i_phone_number := ?, i_password := ?, i_email := ?, i_role := ?)";
 
     public UserDao() {
         this.databaseConfig = new PostgresDatabaseConfig();
@@ -42,6 +42,7 @@ public class UserDao {
             statement.setString(2, user.getPhone_number());
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getPassword());
+            statement.setString(4, user.getRole());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return new User(resultSet);

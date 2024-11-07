@@ -20,7 +20,7 @@ import java.sql.SQLException;
 public class UserRegController extends HttpServlet {
     private final PostgresDatabaseConfig postgresDatabaseConfig = new PostgresDatabaseConfig();
     private final UserDao userDao = new UserDao();
-    private static final String SIGN_UP = "select * from create_user(?, ?, ?,?)";
+    private static final String SIGN_UP = "select * from create_user(?, ?, ?, ?, ?)";
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         RequestDispatcher dispatcher = req.getRequestDispatcher("sign-up.jsp");
@@ -33,6 +33,7 @@ public class UserRegController extends HttpServlet {
         String createPassword = req.getParameter("create-password");
         String createEmail = req.getParameter("email");
         String confirmPassword = req.getParameter("confirm-password");
+        String createRole = req.getParameter("role");
         if (createPassword.equals(confirmPassword)) {
             try (Connection connect = postgresDatabaseConfig.connect();
                  PreparedStatement preparedStatement = connect.prepareStatement(SIGN_UP)) {
@@ -40,6 +41,7 @@ public class UserRegController extends HttpServlet {
                 preparedStatement.setString(2, createPhone_number);
                 preparedStatement.setString(3, createPassword);
                 preparedStatement.setString(4, createEmail);
+                preparedStatement.setString(5, createRole);
 
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if (resultSet.next()) {

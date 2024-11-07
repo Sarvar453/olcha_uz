@@ -20,6 +20,7 @@ public class User {
     private String modifiedAt;
     private String createdBy;
     private String modifiedBy;
+    private String role;
     private boolean active = true;
 
     public User(ResultSet resultSet) throws SQLException {
@@ -32,6 +33,7 @@ public class User {
         this.createdBy = resultSet.getString("created_by");
         this.modifiedAt = resultSet.getString("modified_at");
         this.modifiedBy = resultSet.getString("modified_by");
+        this.role = resultSet.getString("role");
         this.active = resultSet.getBoolean("active");
     }
 }

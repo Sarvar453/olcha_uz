@@ -11,6 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
@@ -29,8 +30,8 @@
             background: rgb(28, 100, 171);
         }
         h3{
-            margin-top: 15px;
-            margin-left: 10px;
+            margin-top: 10px;
+            margin-left: 8px;
         }
         .container{
             width: 500px;
@@ -39,15 +40,15 @@
             box-shadow: 0 5px 10px rgba(0,0,0,0.2);
         }
         .container form{
-            padding: 10px;
+            padding: 8px;
         }
-        .row input{
-            width: 100%;
-            padding: 10px;
+        .form-group{
+            margin-bottom: 5px;
         }
         .button{
             display: flex;
             justify-content: center;
+            margin-top: 15px;
         }
         .btn{
             width: 120px;
@@ -84,6 +85,13 @@
         <div class="form-group">
             <label>Confirm password</label>
             <input class="form-control" name="confirm-password" type="password" placeholder="Confirm password">
+        </div>
+        <div class="form-group select-option">
+            <label>Choose role</label>
+            <select name="role" class="form-select">
+                <option value="USER" selected>User</option>
+                <option value="ADMIN">Admin</option>
+            </select>
         </div>
         <div class="form-group button">
             <button class="btn btn-primary" type="submit">Next</button>
