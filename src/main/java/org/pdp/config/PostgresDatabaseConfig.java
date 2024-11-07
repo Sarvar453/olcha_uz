@@ -14,7 +14,7 @@ public class PostgresDatabaseConfig implements DatabaseConfig {
     @Override
     public Connection connect() {
         try {
-            return DriverManager.getConnection("jdbc:postgresql://10.10.1.134:5432/" + DATABASE, USERNAME, PASSWORD);
+            return DriverManager.getConnection("jdbc:postgresql://10.10.1.134:5432/olcha_uz", USERNAME, PASSWORD);
         }
         catch (SQLException e) {
             e.printStackTrace();
