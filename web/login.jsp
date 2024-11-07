@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 11/6/2024
-  Time: 11:36 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,28 +52,12 @@
     <form action="login" method="post">
         <div class="form-group">
             <label>Username</label>
-            <input class="form-control" name="name" type="text" placeholder="Enter your name" required>
-        </div>
-        <div class="form-group">
-            <label>Phone number</label>
-            <input class="form-control" name="phone-number" type="text" placeholder="Enter your phone number">
-        </div>
-        <div class="form-group">
-            <label>Email</label>
-            <input class="form-control" name="email" type="email" placeholder="Enter your email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <input class="form-control" name="username" type="text" placeholder="Enter your username" required>
         </div>
         <div class="form-group">
             <label>Password</label>
-            <input class="form-control" name="create-password" type="password" placeholder="Create password">
+            <input class="form-control" name="password" type="password" placeholder="Enter you password">
         </div>
-        <div class="form-group">
-            <label>Confirm password</label>
-            <input class="form-control" name="confirm-password" type="password" placeholder="Confirm password">
-        </div>
-<%--        <div class="form-group">--%>
-<%--            --%>
-<%--        </div>--%>
         <div class="form-group button">
             <button class="btn btn-primary">Next</button>
         </div>
@@ -92,4 +68,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
-
