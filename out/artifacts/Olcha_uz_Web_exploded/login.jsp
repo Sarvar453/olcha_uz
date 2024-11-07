@@ -48,18 +48,20 @@
 </head>
 <body>
 <div class="container">
-    <h3>Registration</h3>
+    <h3>Login</h3>
     <form action="login" method="post">
         <div class="form-group">
             <label>Username</label>
-            <input class="form-control" name="username" type="text" placeholder="Enter your username" required>
+            <input class="form-control" name="name" type="text" placeholder="Enter your username" required>
         </div>
+
         <div class="form-group">
             <label>Password</label>
-            <input class="form-control" name="password" type="password" placeholder="Enter you password">
+            <input class="form-control" name="password" type="password" placeholder="Enter your password">
         </div>
+
         <div class="form-group button">
-            <button class="btn btn-primary">Next</button>
+            <button class="btn btn-primary" type="submit" >Next</button>
         </div>
     </form>
 </div>

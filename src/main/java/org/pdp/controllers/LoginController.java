@@ -23,13 +23,13 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
+        String username = req.getParameter("name");
         String password = req.getParameter("password");
         User user = userDao.getUserByUsernameAndPassword(username, password);
 
         if (user != null) {
-            req.getSession().setAttribute("user", user);
-            resp.sendRedirect("home.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("home.jsp");
+            dispatcher.forward(req,resp);
         } else {
             req.setAttribute("error", "Invalid username or password. Please try again.");
             RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");

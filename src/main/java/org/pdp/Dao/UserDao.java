@@ -12,7 +12,7 @@ public class UserDao {
     private final DatabaseConfig databaseConfig;
     private static final String GET_USER_LIST = "select * from read_users()";
     private static final String INSERT_USER = "select * from create_users(i_username := ?, i_email := ?, i_password := ?)";
-    private static final String GET_USER_BY_USERNAME_PASSWORD = "select * from userss where username = ? and password = ?";
+    private static final String GET_USER_BY_USERNAME_PASSWORD = "select * from users where name = ? and password = ?";
     public UserDao() {
         this.databaseConfig = new PostgresDatabaseConfig();
     }

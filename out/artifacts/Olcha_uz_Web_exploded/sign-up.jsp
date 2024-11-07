@@ -63,11 +63,7 @@
 <body>
 <div class="container">
     <h3>Registration</h3>
-<<<<<<< HEAD
-    <form action="login" method="post">
-=======
     <form action="sign-up" method="post">
->>>>>>> dfd57850bfa48748103d12aef34451ece30fd25d
         <div class="form-group">
             <label>Username</label>
             <input class="form-control" name="name" type="text" placeholder="Enter your name" required>
