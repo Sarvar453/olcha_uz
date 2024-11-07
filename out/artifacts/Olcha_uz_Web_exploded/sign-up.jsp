@@ -57,7 +57,7 @@
 <body>
 <div class="container">
     <h3>Registration</h3>
-    <form action="login" method="post">
+    <form action="sign-in" method="post">
         <div class="form-group">
             <label>Username</label>
             <input class="form-control" name="name" type="text" placeholder="Enter your name" required>

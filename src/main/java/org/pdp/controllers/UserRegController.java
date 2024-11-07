@@ -29,23 +29,24 @@ public class UserRegController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String createUsername = req.getParameter("create-username");
-        String createEmail = req.getParameter("create-email");
+        String createPhone_number = req.getParameter("create-phone-number");
         String createPassword = req.getParameter("create-password");
+        String createEmail = req.getParameter("create-email");
         String confirmPassword = req.getParameter("confirm-password");
 
         if (createPassword.equals(confirmPassword)) {
             try (Connection connect = postgresDatabaseConfig.connect();
                  PreparedStatement preparedStatement = connect.prepareStatement(SIGN_UP)) {
-
                 preparedStatement.setString(1, createUsername);
-                preparedStatement.setString(2, createEmail);
+                preparedStatement.setString(2, createPhone_number);
                 preparedStatement.setString(3, createPassword);
+                preparedStatement.setString(4, createEmail);
 
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if (resultSet.next()) {
                     User user = new User(resultSet);
                     userDao.addUser(user);
-                    RequestDispatcher dispatcher = req.getRequestDispatcher("sign-in.jsp");
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");
                     dispatcher.forward(req,resp);
                 }
             } catch (SQLException e) {

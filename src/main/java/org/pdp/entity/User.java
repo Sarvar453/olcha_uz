@@ -12,7 +12,7 @@ import java.sql.SQLException;
 @Data
 public class User {
     private int id;
-    private String name;
+    private String username;
     private String phone_number;
     private String password;
     private String email;
@@ -24,7 +24,7 @@ public class User {
 
     public User(ResultSet resultSet) throws SQLException {
         this.id = resultSet.getInt("id");
-        this.name = resultSet.getString("username");
+        this.username = resultSet.getString("username");
         this.phone_number = resultSet.getString("phone_number");
         this.email = resultSet.getString("email");
         this.password = resultSet.getString("password");
