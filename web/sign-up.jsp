@@ -52,12 +52,18 @@
         .btn{
             width: 120px;
         }
+        .switch{
+            display: flex;
+            margin: auto;
+            width: 210px;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h3>Registration</h3>
-    <form action="login" method="post">
+    <form action="sign-up" method="post">
         <div class="form-group">
             <label>Username</label>
             <input class="form-control" name="name" type="text" placeholder="Enter your name" required>
@@ -79,11 +85,12 @@
             <label>Confirm password</label>
             <input class="form-control" name="confirm-password" type="password" placeholder="Confirm password">
         </div>
-<%--        <div class="form-group">--%>
-<%--            --%>
-<%--        </div>--%>
         <div class="form-group button">
-            <button class="btn btn-primary">Next</button>
+            <button class="btn btn-primary" type="submit">Next</button>
+        </div>
+        <div class="form-group switch">
+            <p>Already registered?</p>
+            <a href="/login"> Login</a>
         </div>
     </form>
 </div>
