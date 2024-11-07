@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Olcha.uz:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Olcha_uz_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Olcha.uz/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Olcha.uz" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
