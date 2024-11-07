@@ -13,8 +13,6 @@ public class UserDao {
     private static final String GET_USER_LIST = "select * from read_users()";
     private static final String INSERT_USER = "select * from create_users(i_username := ?, i_email := ?, i_password := ?)";
     private static final String GET_USER_BY_USERNAME_PASSWORD = "select * from userss where username = ? and password = ?";
-
-
     public UserDao() {
         this.databaseConfig = new PostgresDatabaseConfig();
     }
@@ -37,7 +35,8 @@ public class UserDao {
     public User addUser(User user) {
         try (Connection connect = databaseConfig.connect();
              PreparedStatement statement = connect.prepareStatement(INSERT_USER)) {
-            statement.setString(1, user.getUsername());
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getPhone_number());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getEmail());
             ResultSet resultSet = statement.executeQuery();
