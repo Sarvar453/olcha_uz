@@ -103,6 +103,10 @@
   </div>
   <div class="right-column">
     <button type="submit" class="btn btn-info add-category" data-toggle="modal" data-target="#addCategoryModal">Add category</button>
+    <c:if test="${empty list}">
+      <h3>No categories found.</h3>
+    </c:if>
+    <c:forEach items="${list}" var="category">
     <table class="table table-bordered">
       <thead class="thead-dark">
       <tr>
@@ -118,7 +122,6 @@
       </tr>
       </thead>
       <tbody>
-      <c:forEach items="${list}" var="category">
         <tr>
           <th scope="row">${category.getId()}</th>
           <td>${category.getName()}</td>
@@ -129,13 +132,16 @@
           <td>${category.getModifiedBy()}</td>
           <td>${category.getActive()}</td>
           <td class="td-gap">
-            <button class="btn btn-primary update-button" type="button" data-toggle="modal" data-target="#updateCategoryModal" onclick="setUpdateCategoryParams(${category.getId()},${category.getName()},${category.getParentId()})">Update</button>
+            <button class="btn btn-primary update-button" type="button" data-toggle="modal" data-target="#updateCategoryModal"
+                    onclick="setUpdateCategoryParams('${category.id}', '${category.name}', '${category.parentId}')">
+              Update
+            </button>
             <button class="btn btn-danger delete-button" type="button" data-toggle="modal" data-target="#deleteCategoryModal" onclick="setDeleteCategoryId(${category.getId()})">Delete</button>
           </td>
         </tr>
-      </c:forEach>
       </tbody>
     </table>
+    </c:forEach>
   </div>
 </div>
 <!-- Category add Modal -->
