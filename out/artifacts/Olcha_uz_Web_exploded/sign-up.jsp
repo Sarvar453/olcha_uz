@@ -30,7 +30,7 @@
             background: rgb(28, 100, 171);
         }
         h3{
-            margin-top: 10px;
+            margin-top: 15px;
             margin-left: 8px;
         }
         .container{
@@ -43,7 +43,7 @@
             padding: 8px;
         }
         .form-group{
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
         .button{
             display: flex;
@@ -76,21 +76,28 @@
         <div class="form-group">
             <label>Email</label>
             <input class="form-control" name="email" type="email" placeholder="Enter your email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
             <label>Password</label>
             <input class="form-control" name="create-password" type="password" placeholder="Create password">
         </div>
         <div class="form-group">
-            <label>Confirm password</label>
             <input class="form-control" name="confirm-password" type="password" placeholder="Confirm password">
         </div>
         <div class="form-group select-option">
             <label>Choose role</label>
-            <select name="role" class="form-select">
+            <select name="role" class="form-select" id="role-select" onchange="togglePermissions()">
                 <option value="USER" selected>User</option>
                 <option value="ADMIN">Admin</option>
+            </select>
+        </div>
+        <div class="form-group select-option" id="permission-container" style="display: none">
+            <label>Choose permissions</label>
+            <select name="permission" class="form-select" id="permission-select">
+                <option value="ALL" selected>All</option>
+                <option value="CREATE">Create</option>
+                <option value="UPDATE">Update</option>
+                <option value="DELETE">Delete</option>
             </select>
         </div>
         <div class="form-group button">
@@ -102,6 +109,17 @@
         </div>
     </form>
 </div>
+<script>
+    function togglePermissions() {
+        const roleSelect = document.getElementById("role-select");
+        const permissionsContainer = document.getElementById("permission-container");
+        if (roleSelect.value === "ADMIN") {
+            permissionsContainer.style.display = "block";
+        } else {
+            permissionsContainer.style.display = "none";
+        }
+    }
+</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

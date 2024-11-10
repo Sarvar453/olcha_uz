@@ -44,6 +44,12 @@
         .btn{
             width: 120px;
         }
+        .switch{
+            display: flex;
+            margin: auto;
+            width: 300px;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
@@ -62,6 +68,10 @@
 
         <div class="form-group button">
             <button class="btn btn-primary" type="submit" >Next</button>
+        </div>
+        <div class="form-group switch">
+            <p>You don't have an account?</p>
+            <a href="/sign-up"> Sign-up</a>
         </div>
     </form>
 </div>

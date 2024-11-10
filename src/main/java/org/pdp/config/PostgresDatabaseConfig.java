@@ -1,5 +1,6 @@
 package org.pdp.config;
 import org.pdp.config.exception.PostgresConnectException;
+import org.pdp.entity.Category;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,8 +14,10 @@ public class PostgresDatabaseConfig implements DatabaseConfig {
 
     @Override
     public Connection connect() {
+
+
         try {
-            return DriverManager.getConnection("jdbc:postgresql://10.10.1.134:5432/olcha_uz", USERNAME, PASSWORD);
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/olcha_uz", USERNAME, PASSWORD);
         }
         catch (SQLException e) {
             e.printStackTrace();

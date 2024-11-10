@@ -11,13 +11,11 @@ import java.util.List;
 public class UserDao {
     private final DatabaseConfig databaseConfig;
     private static final String GET_USER_LIST = "select * from read_users()";
-    private static final String INSERT_USER = "select * from create_user(i_username := ?, i_phone_number := ?, i_password := ?, i_email := ?, i_role := ?)";
+    private static final String INSERT_USER = "select * from create_user(i_username := ?, i_phone_number := ?, i_password := ?, i_email := ?, i_role := ?, i_permission := ?)";
     private static final String GET_USER_BY_USERNAME_PASSWORD = "select * from users where name = ? and password = ?";
-
     public UserDao() {
         this.databaseConfig = new PostgresDatabaseConfig();
     }
-
     public List<User> getUsers() {
         List<User> users = new ArrayList<>();
         try (Connection connect = databaseConfig.connect()) {
@@ -41,6 +39,7 @@ public class UserDao {
             statement.setString(3, user.getPassword());
             statement.setString(4, user.getEmail());
             statement.setString(5, user.getRole());
+            statement.setString(6, user.getPermission());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return new User(resultSet);
