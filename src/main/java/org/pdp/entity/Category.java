@@ -18,6 +18,7 @@ public class Category {
     private String createdBy;
     private String modifiedBy;
     private Boolean active;
+
     public Category(ResultSet resultSet) throws SQLException {
         this.id = resultSet.getInt("id");
         this.name = resultSet.getString("name");
@@ -27,6 +28,20 @@ public class Category {
         this.modifiedAt = resultSet.getString("modified_at");
         this.modifiedBy = resultSet.getString("modified_by");
         this.active = resultSet.getBoolean("active");
+    }
+
+    public Category(String name, Integer parentId, String createdBy, String modifiedBy) {
+        this.name = name;
+        this.parentId = parentId;
+        this.createdBy = createdBy;
+        this.modifiedBy = modifiedBy;
+    }
+
+    public Category(Integer id, String name, Integer parentId, String modifiedBy) {
+        this.id = id;
+        this.name = name;
+        this.parentId = parentId;
+        this.modifiedBy = modifiedBy;
     }
 }
 

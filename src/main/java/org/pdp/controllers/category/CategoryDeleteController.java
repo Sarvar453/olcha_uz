@@ -1,4 +1,4 @@
-package org.pdp.controllers;
+package org.pdp.controllers.category;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -7,16 +7,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.pdp.Dao.CategoryDao;
-import org.pdp.Dao.UserDao;
 import org.pdp.config.PostgresDatabaseConfig;
 import org.pdp.context.Context;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 
 @WebServlet("/delete-category")
-public class CategoryDeleteController extends HttpServlet {
+public class CategoryDeleteController extends BaseCategoryController {
     private final PostgresDatabaseConfig postgresDatabaseConfig = new PostgresDatabaseConfig();
     private final CategoryDao categoryDao = new CategoryDao();
     @Override
