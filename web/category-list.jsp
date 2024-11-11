@@ -106,7 +106,7 @@
     </form>
   </div>
   <div class="right-column">
-    <button type="submit" class="btn btn-info add-category" data-toggle="modal" data-target="#addCategoryModal" <c:if test="${userPermission != 'CREATE' && userPermission !='ALL'}">disabled</c:if>>Add category</button>
+    <button type="submit" class="btn btn-info add-category" data-toggle="modal" data-target="#addCategoryModal" >Add category</button>
     <c:if test="${empty list}">
       <h3>No categories found.</h3>
     </c:if>
@@ -140,7 +140,7 @@
             <td class="td-gap">
               <button class="btn btn-primary update-button" type="button" data-toggle="modal" data-target="#updateCategoryModal"
                       onclick="setUpdateCategoryParams('${category.id}', '${category.name}', '${category.parentId}')"
-                ${userPermission != 'UPDATE' && userPermission != 'ALL' ? 'disabled' : ''}>
+                ${userPermission != 'UPDATE' && userPermission != 'ALL' ? '' : ''}>
                 Update
               </button>
               <button class="btn btn-danger delete-button" type="button" data-toggle="modal" data-target="#deleteCategoryModal"
@@ -246,37 +246,7 @@
   </div>
 </div>
 
-<script>
-  function toggleCheckbox() {
-    const checkBoxes = document.querySelectorAll(".checkBox");
-    const parentIds = document.querySelectorAll(".parentId");
-
-    checkBoxes.forEach((checkBox, index) => {
-      if (checkBox.checked) {
-        parentIds[index].style.display = "block";
-      } else {
-        parentIds[index].style.display = "none";
-      }
-    });
-  }
-  function setDeleteCategoryId(categoryId) {
-    document.getElementById('deleteCategoryId').value = categoryId;
-  }
-  function setUpdateCategoryParams(categoryId, categoryName, parentId) {
-    document.getElementById('updateCategoryId').value = categoryId;
-    document.getElementById('updateCategoryName').value = categoryName;
-    const parentIdField = document.getElementById('updateCategoryParentId');
-    if (parentId) {
-      document.querySelector(".checkBox").checked = true;
-      parentIdField.value = parentId;
-      document.querySelector(".parentId").style.display = "block";
-    } else {
-      document.querySelector(".checkBox").checked = false;
-      parentIdField.value = "";
-      document.querySelector(".parentId").style.display = "none";
-    }
-  }
-</script>
+<script src="js/category-list.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

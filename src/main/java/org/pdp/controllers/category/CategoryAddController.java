@@ -1,38 +1,42 @@
-package org.pdp.controllers;
+package org.pdp.controllers.category;
 
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.pdp.Dao.CategoryDao;
-import org.pdp.Dao.UserDao;
-import org.pdp.config.PostgresDatabaseConfig;
 import org.pdp.context.Context;
 import org.pdp.entity.Category;
+import org.pdp.service.CategoryService;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 
 @WebServlet("/add-category")
-public class CategoryAddController extends HttpServlet {
-    private final CategoryDao categoryDao = new CategoryDao();
+public class CategoryAddController extends BaseCategoryController {
+    private CategoryDao categoryDao;
+    private CategoryService categoryService;
+
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        categoryDao = new CategoryDao();
+        categoryService = new CategoryService(categoryDao);
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String username = getUsernameFromCookie(req);
+        if (username == null) {
+            resp.sendRedirect("/login");
+            return;
+        }
+
         String categoryName = req.getParameter("category_name");
         String parentIdParam = req.getParameter("parent_id");
-        Integer parentId = null;
-        if (parentIdParam!=null && !parentIdParam.isEmpty()){
-            try {
-                parentId = Integer.parseInt(parentIdParam);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-        }
-        Category category = new Category(0,categoryName,parentId,null,null,null,null,true);
-        categoryDao.addCategory(category);
+        categoryService.addCategory(parentIdParam, categoryName, username);
         req.setAttribute("list", categoryDao.getCategories());
         req.setAttribute("userPermission", Context.getCurrentUser().getPermission());
         RequestDispatcher dispatcher = req.getRequestDispatcher("category-list.jsp");
