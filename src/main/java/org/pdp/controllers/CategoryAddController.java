@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.pdp.Dao.CategoryDao;
 import org.pdp.Dao.UserDao;
 import org.pdp.config.PostgresDatabaseConfig;
+import org.pdp.context.Context;
 import org.pdp.entity.Category;
 
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class CategoryAddController extends HttpServlet {
         Category category = new Category(0,categoryName,parentId,null,null,null,null,true);
         categoryDao.addCategory(category);
         req.setAttribute("list", categoryDao.getCategories());
+        req.setAttribute("userPermission", Context.getCurrentUser().getPermission());
         RequestDispatcher dispatcher = req.getRequestDispatcher("category-list.jsp");
         dispatcher.forward(req,resp);
     }

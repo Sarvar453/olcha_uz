@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.pdp.Dao.CategoryDao;
+import org.pdp.Dao.UserDao;
+import org.pdp.context.Context;
 import org.pdp.entity.Category;
 
 import java.io.IOException;
@@ -14,6 +16,7 @@ import java.io.IOException;
 @WebServlet("/update-category")
 public class CategoryUpdateController extends HttpServlet {
     private final CategoryDao categoryDao = new CategoryDao();
+    private final UserDao userDao = new UserDao();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer categoryId = Integer.parseInt(req.getParameter("category-id"));
@@ -34,6 +37,7 @@ public class CategoryUpdateController extends HttpServlet {
         Category category = new Category(categoryId,categoryName,parentId,null,null,null,null,null);
         categoryDao.updateCategory(category);
         req.setAttribute("list", categoryDao.getCategories());
+        req.setAttribute("userPermission", Context.getCurrentUser().getPermission());
         RequestDispatcher dispatcher = req.getRequestDispatcher("category-list.jsp");
         dispatcher.forward(req,resp);
     }

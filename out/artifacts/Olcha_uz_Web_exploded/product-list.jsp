@@ -108,52 +108,45 @@
   <div class="right-column">
     <button type="submit" class="btn btn-info add-category" data-toggle="modal" data-target="#addCategoryModal" <c:if test="${userPermission != 'CREATE' && userPermission !='ALL'}">disabled</c:if>>Add category</button>
     <c:if test="${empty list}">
-      <h3>No categories found.</h3>
+      <h3>No products found.</h3>
     </c:if>
-
-    <c:if test="${!empty list}">
-      <table class="table table-bordered">
-        <thead class="thead-dark">
+    <c:forEach items="${list}" var="product">
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Parent ID</th>
+        <th scope="col">Created at</th>
+        <th scope="col">Modified at</th>
+        <th scope="col">Created by</th>
+        <th scope="col">Modified by</th>
+        <th scope="col">active</th>
+        <th scope="col">action</th>
+      </tr>
+      </thead>
+      <tbody>
         <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Parent ID</th>
-          <th scope="col">Created at</th>
-          <th scope="col">Modified at</th>
-          <th scope="col">Created by</th>
-          <th scope="col">Modified by</th>
-          <th scope="col">Active</th>
-          <th scope="col">Action</th>
+          <th scope="row">${product.getId()}</th>
+          <th>${product.getCategoryId()}</th>
+          <td>${product.getName()}</td>
+          <td>${category.getPrice()}</td>
+          <td>${category.getCreatedAt()}</td>
+          <td>${category.getModifiedAt()}</td>
+          <td>${category.getCreatedBy()}</td>
+          <td>${category.getModifiedBy()}</td>
+          <td>${category.getActive()}</td>
+          <td class="td-gap">
+            <button class="btn btn-primary update-button" type="button" data-toggle="modal" data-target="#updateCategoryModal"
+                    onclick="setUpdateCategoryParams('${category.id}', '${category.name}', '${category.parentId}')" <c:if test="${userPermission != 'UPDATE' && userPermission != 'ALL'}">disabled</c:if>>
+              Update
+            </button>
+            <button class="btn btn-danger delete-button" type="button" data-toggle="modal" data-target="#deleteCategoryModal" onclick="setDeleteCategoryId(${category.getId()})" <c:if test="${userPermission != 'DELETE' && userPermission != 'ALL'}">disabled</c:if>>Delete</button>
+          </td>
         </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${list}" var="category">
-          <tr>
-            <th scope="row">${category.getId()}</th>
-            <td>${category.getName()}</td>
-            <td>${category.getParentId()}</td>
-            <td>${category.getCreatedAt()}</td>
-            <td>${category.getModifiedAt()}</td>
-            <td>${category.getCreatedBy()}</td>
-            <td>${category.getModifiedBy()}</td>
-            <td>${category.getActive()}</td>
-            <td class="td-gap">
-              <button class="btn btn-primary update-button" type="button" data-toggle="modal" data-target="#updateCategoryModal"
-                      onclick="setUpdateCategoryParams('${category.id}', '${category.name}', '${category.parentId}')"
-                ${userPermission != 'UPDATE' && userPermission != 'ALL' ? 'disabled' : ''}>
-                Update
-              </button>
-              <button class="btn btn-danger delete-button" type="button" data-toggle="modal" data-target="#deleteCategoryModal"
-                      onclick="setDeleteCategoryId(${category.getId()})"
-                ${userPermission != 'DELETE' && userPermission != 'ALL' ? 'disabled' : ''}>
-                Delete
-              </button>
-            </td>
-          </tr>
-        </c:forEach>
-        </tbody>
-      </table>
-    </c:if>
+      </tbody>
+    </table>
+    </c:forEach>
   </div>
 </div>
 <!-- Category add Modal -->
@@ -225,6 +218,7 @@
       <div class="modal-body">
         <form action="update-category" method="post" style="display:inline;">
           <input type="hidden" name="category-id" id="updateCategoryId"/>
+
           <div class="form-group">
             <input type="text" name="category-name" id="updateCategoryName" class="form-control"/>
           </div>
@@ -282,3 +276,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
+

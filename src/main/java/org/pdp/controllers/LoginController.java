@@ -30,6 +30,7 @@ public class LoginController extends HttpServlet {
         if (user != null) {
             Context.setCurrentUser(user);
             req.setAttribute("list", categoryDao.getCategories());
+            req.setAttribute("userPermission", user.getPermission());
             RequestDispatcher dispatcher = req.getRequestDispatcher("category-list.jsp");
             dispatcher.forward(req,resp);
         } else {

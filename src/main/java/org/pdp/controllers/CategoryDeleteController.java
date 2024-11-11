@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.pdp.Dao.CategoryDao;
 import org.pdp.Dao.UserDao;
 import org.pdp.config.PostgresDatabaseConfig;
+import org.pdp.context.Context;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -23,6 +24,7 @@ public class CategoryDeleteController extends HttpServlet {
         int categoryId = Integer.parseInt(req.getParameter("category_id"));
         categoryDao.deleteCategory(categoryId);
         req.setAttribute("list", categoryDao.getCategories());
+        req.setAttribute("userPermission", Context.getCurrentUser().getPermission());
         RequestDispatcher dispatcher = req.getRequestDispatcher("category-list.jsp");
         dispatcher.forward(req,resp);
     }

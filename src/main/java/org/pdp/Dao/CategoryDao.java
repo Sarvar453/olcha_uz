@@ -54,7 +54,7 @@ public class CategoryDao {
                 else{
                     statement.setNull(3, Types.INTEGER);
                 }
-                statement.executeUpdate();
+                statement.executeQuery();
             }
         } catch (Exception e) {
             e.printStackTrace();
