@@ -16,7 +16,6 @@ import java.io.IOException;
 @WebServlet("/switch")
 public class SwitchController extends HttpServlet {
     private final PostgresDatabaseConfig postgresDatabaseConfig = new PostgresDatabaseConfig();
-    private final UserDao userDao = new UserDao();
     private final CategoryDao categoryDao = new CategoryDao();
     private final ProductDao productDao = new ProductDao();
     private final OrderDao orderDao = new OrderDao();
