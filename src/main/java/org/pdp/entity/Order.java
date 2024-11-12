@@ -17,6 +17,7 @@ public class Order {
     private String status;
     private boolean active;
     private int quantity;
+    private int productId;
     private Date created_date;
     private Date updated_date;
 
@@ -28,5 +29,16 @@ public class Order {
         this.quantity = resultSet.getInt("quantity");
         this.created_date = resultSet.getDate("created_date");
         this.updated_date = resultSet.getDate("updated_date");
+    }
+
+    public  Order(int id, int quantity) {
+        this.id = id;
+        this.quantity = quantity;
+    }
+
+    public Order(int id, int productId, int quantity) {
+        this.id = id;
+        this.productId = productId;
+        this.quantity = quantity;
     }
 }

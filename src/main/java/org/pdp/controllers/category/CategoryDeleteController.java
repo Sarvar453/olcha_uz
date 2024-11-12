@@ -16,6 +16,7 @@ import java.io.IOException;
 public class CategoryDeleteController extends BaseCategoryController {
     private final PostgresDatabaseConfig postgresDatabaseConfig = new PostgresDatabaseConfig();
     private final CategoryDao categoryDao = new CategoryDao();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int categoryId = Integer.parseInt(req.getParameter("category_id"));

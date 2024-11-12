@@ -1,4 +1,4 @@
-package org.pdp.controllers;
+package org.pdp.controllers.cart;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -6,26 +6,26 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.pdp.Dao.OrderDao;
-import org.pdp.entity.Order;
+import org.pdp.Dao.CartDao;
+import org.pdp.entity.Cart;
 
 import java.io.IOException;
 
-@WebServlet("/update-order")
-public class OrderUpdateController extends HttpServlet {
-    private final OrderDao orderDao = new OrderDao();
+@WebServlet("/update-cart")
+public class CartUpdateController extends HttpServlet {
+    private final CartDao cartDao = new CartDao();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int orderId = Integer.parseInt(req.getParameter("order_id"));
+        int cartId = Integer.parseInt(req.getParameter("cart_id"));
         int productId = Integer.parseInt(req.getParameter("product_id"));
         int quantity = Integer.parseInt(req.getParameter("quantity"));
 
-        Order order = new Order(orderId, productId, null, true, quantity, null, null);
-        orderDao.updateOrder(order);
+        Cart cart = new Cart(cartId, 0, productId, quantity, false, null, null);
+        cartDao.updateCart(cart);
 
-        req.setAttribute("list", orderDao.getOrders());
-        RequestDispatcher dispatcher = req.getRequestDispatcher("order-list.jsp");
+        req.setAttribute("list", cartDao.getCarts());
+        RequestDispatcher dispatcher = req.getRequestDispatcher("cart-list.jsp");
         dispatcher.forward(req, resp);
     }
 }

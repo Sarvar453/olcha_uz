@@ -1,4 +1,4 @@
-package org.pdp.controllers;
+package org.pdp.controllers.product;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -23,7 +23,7 @@ public class ProductAddController extends HttpServlet {
         String categoryIdParam = req.getParameter("category_id");
         Integer categoryId = categoryIdParam != null ? Integer.parseInt(categoryIdParam) : null;
 
-        Product product = new Product(0, 0, productName, price, false, null, null);
+        Product product = new Product(0, categoryId, productName, price, false, null, null);
         productDao.addProduct(product);
         req.setAttribute("list", productDao.getProducts());
         RequestDispatcher dispatcher = req.getRequestDispatcher("product-list.jsp");
