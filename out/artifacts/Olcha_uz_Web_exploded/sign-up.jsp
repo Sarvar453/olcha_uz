@@ -31,6 +31,7 @@
         }
         h3{
             margin-top: 15px;
+            margin-bottom: 8px !important;
             margin-left: 8px;
         }
         .container{
@@ -66,8 +67,11 @@
     <h3>Registration</h3>
     <form action="sign-up" method="post">
         <div class="form-group">
-            <label>Username</label>
+            <label>Name/Username</label>
             <input class="form-control" name="name" type="text" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="name" type="text" placeholder="Enter your username" required>
         </div>
         <div class="form-group">
             <label>Phone number</label>

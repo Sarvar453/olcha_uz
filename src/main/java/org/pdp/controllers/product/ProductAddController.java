@@ -16,27 +16,22 @@ import java.io.IOException;
 import java.sql.Date;
 
 @WebServlet("/add-product")
-public class ProductAddController extends BaseProductController {
-    private ProductDao productDao;
+public class ProductAddController extends HttpServlet {
     private ProductService productService;
-
     @Override
     public void init(ServletConfig config) throws ServletException {
-        productDao=new ProductDao();
-        productService=new ProductService(productDao);
+        productService = new ProductService(new ProductDao());
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String username = (String)req.getAttribute("authentication");
         String productName = req.getParameter("product-name");
         Double productPrice = Double.parseDouble(req.getParameter("product-price"));
         String productDescription = req.getParameter("product-description");
         String productDiscount = req.getParameter("product-discount");
         Date productFromDelivery = Date.valueOf(req.getParameter("product-from_delivery")) ;
         Date productToDelivery = Date.valueOf(req.getParameter("product-to_delivery"));
-        productService.addProduct(productName,productPrice,productDescription,productDiscount,productFromDelivery,productToDelivery,BaseController.getUsernameFromCookie(req));
-        req.setAttribute("list", productDao.getProducts());
-        RequestDispatcher dispatcher = req.getRequestDispatcher("product-list.jsp");
-        dispatcher.forward(req, resp);
+        productService.addProduct(productName,productPrice,productDescription,productDiscount,productFromDelivery,productToDelivery,username);
+        resp.sendRedirect("/admin/product-list");
     }
 }

@@ -14,7 +14,7 @@ import org.pdp.context.Context;
 
 import java.io.IOException;
 
-@WebServlet("/switch")
+@WebServlet("/admin/switch")
 public class SwitchController extends HttpServlet {
     private final PostgresDatabaseConfig postgresDatabaseConfig = new PostgresDatabaseConfig();
     private CategoryDao categoryDao;
@@ -33,21 +33,16 @@ public class SwitchController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("table-type").equals("Categories")){
-            req.setAttribute("list", categoryDao.getCategories());
             resp.sendRedirect("/category-list");
         }
         else if (req.getParameter("table-type").equals("Products")){
-            req.setAttribute("list", productDao.getProducts());
             resp.sendRedirect("/product-list");
         }
         else if (req.getParameter("table-type").equals("Orders")){
-            req.setAttribute("list", orderDao.getOrders());
-            req.setAttribute("userPermission", Context.getCurrentUser().getPermission());
+
             resp.sendRedirect("/order-list");
         }
         else if (req.getParameter("table-type").equals("Carts")){
-            req.setAttribute("list", cartDao.getCarts());
-            req.setAttribute("userPermission", Context.getCurrentUser().getPermission());
             resp.sendRedirect("/cart-list");
         }
     }

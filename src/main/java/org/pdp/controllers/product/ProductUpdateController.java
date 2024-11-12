@@ -12,7 +12,7 @@ import org.pdp.entity.Product;
 import java.io.IOException;
 
 @WebServlet("/update-product")
-public class ProductUpdateController extends BaseProductController {
+public class ProductUpdateController extends HttpServlet {
     private final ProductDao productDao = new ProductDao();
 
     @Override
