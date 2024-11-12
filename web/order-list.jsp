@@ -118,12 +118,13 @@
                     <th scope="col">ID</th>
                     <th scope="col">User ID</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Product ID</th>
+                    <th scope="col">PromoCode ID</th>
                     <th scope="col">Created date</th>
-                    <th scope="col">Updated date</th>
+                    <th scope="col">Modified date</th>
+                    <th scope="col">Created By</th>
+                    <th scope="col">Modified By</th>
                     <th scope="col">Active</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Permission</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -132,23 +133,12 @@
                         <th scope="row">${order.getId()}</th>
                         <td>${order.getUserId()}</td>
                         <td>${order.getStatus()}</td>
-                        <td>${order.getQuantity()}</td>
-                        <td>${order.getProductId()}</td>
-                        <td>${order.getCreated_date()}</td>
-                        <td>${order.getUpdated_date()}</td>
+                        <td>${order.getCreated_at()}</td>
+                        <td>${order.getModified_at()}</td>
+                        <td>${order.getCreated_by()}</td>
+                        <td>${order.getUpdated_by()}</td>
                         <td>${order.getAсtive()}</td>
-                        <td class="td-gap">
-                            <button class="btn btn-primary update-button" type="button" data-toggle="modal" data-target="#updateOrderModal"
-                                    onclick="setUpdateOrderParams('${order.id}', '${order.productId}', '${order.quantity}')"
-                                ${userPermission != 'UPDATE' && userPermission != 'ALL' ? '' : ''}>
-                                Update
-                            </button>
-                            <button class="btn btn-danger delete-button" type="button" data-toggle="modal" data-target="#deleteOrderModal"
-                                    onclick="setDeleteOrderId(${order.getId()})"
-                                ${userPermission != 'DELETE' && userPermission != 'ALL' ? 'disabled' : ''}>
-                                Delete
-                            </button>
-                        </td>
+                        <td>${order.getPermission()}</td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -156,95 +146,95 @@
         </c:if>
     </div>
 </div>
-<!-- Order add Modal -->
-<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add order</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="add-order" method="post">
-                    <div class="form-group">
-                        <label>Enter name of the order</label>
-                        <input class="form-control" name="order_name" type="text" placeholder="Order name" required>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input checkBox" type="checkbox" onchange="toggleCheckbox()">
-                        <label class="form-check-label">Sub order</label>
-                    </div>
-                    <div class="form-group parentId" style="display: none">
-                        <label>Enter order's product id</label>
-                        <input class="form-control" name="parent_id" type="number" placeholder="Parent id">
-                    </div>
-                    <div class="modal-footer primary-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Delete Modal -->
-<div class="modal fade" id="deleteOrderModal" tabindex="-1" role="dialog" aria-labelledby="deleteOrderTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteOrderTitle">Warning!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>You really want to delete this order?<br>All products and suborders depending on this order also will be removed!</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <form action="delete-category" method="post">
-                    <input type="hidden" name="category_id" id="deleteCategoryId"/>
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Update Modal -->
-<div class="modal fade" id="updateOrderModal" tabindex="-1" role="dialog" aria-labelledby="updateOrderTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="updateOrderTitle">Update order</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="update-order" method="post" style="display:inline;">
-                    <input type="hidden" name="category-id" id="updateCategoryId"/>
-                    <div class="form-group">
-                        <input type="text" name="category-name" id="updateCategoryName" class="form-control"/>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input checkBox" type="checkbox" onchange="toggleCheckbox()">
-                        <label class="form-check-label">Sub order</label>
-                    </div>
-                    <div class="form-group parentId" style="display: none">
-                        <label>Enter order's product id</label>
-                        <input class="form-control" name="product-id" id="updateOrderProductId" type="number">
-                    </div>
-                    <div class="modal-footer primary-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<%--<!-- Order add Modal -->--%>
+<%--<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryTitle" aria-hidden="true">--%>
+<%--    <div class="modal-dialog modal-dialog-centered" role="document">--%>
+<%--        <div class="modal-content">--%>
+<%--            <div class="modal-header">--%>
+<%--                <h5 class="modal-title">Add order</h5>--%>
+<%--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
+<%--                    <span aria-hidden="true">&times;</span>--%>
+<%--                </button>--%>
+<%--            </div>--%>
+<%--            <div class="modal-body">--%>
+<%--                <form action="add-order" method="post">--%>
+<%--                    <div class="form-group">--%>
+<%--                        <label>Enter name of the order</label>--%>
+<%--                        <input class="form-control" name="order_name" type="text" placeholder="Order name" required>--%>
+<%--                    </div>--%>
+<%--                    <div class="form-check">--%>
+<%--                        <input class="form-check-input checkBox" type="checkbox" onchange="toggleCheckbox()">--%>
+<%--                        <label class="form-check-label">Sub order</label>--%>
+<%--                    </div>--%>
+<%--                    <div class="form-group parentId" style="display: none">--%>
+<%--                        <label>Enter order's product id</label>--%>
+<%--                        <input class="form-control" name="parent_id" type="number" placeholder="Parent id">--%>
+<%--                    </div>--%>
+<%--                    <div class="modal-footer primary-footer">--%>
+<%--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--%>
+<%--                        <button type="submit" class="btn btn-primary">Add</button>--%>
+<%--                    </div>--%>
+<%--                </form>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+<%--<!-- Delete Modal -->--%>
+<%--<div class="modal fade" id="deleteOrderModal" tabindex="-1" role="dialog" aria-labelledby="deleteOrderTitle" aria-hidden="true">--%>
+<%--    <div class="modal-dialog modal-dialog-centered" role="document">--%>
+<%--        <div class="modal-content">--%>
+<%--            <div class="modal-header">--%>
+<%--                <h5 class="modal-title" id="deleteOrderTitle">Warning!</h5>--%>
+<%--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
+<%--                    <span aria-hidden="true">&times;</span>--%>
+<%--                </button>--%>
+<%--            </div>--%>
+<%--            <div class="modal-body">--%>
+<%--                <p>You really want to delete this order?<br>All products and suborders depending on this order also will be removed!</p>--%>
+<%--            </div>--%>
+<%--            <div class="modal-footer">--%>
+<%--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--%>
+<%--                <form action="delete-category" method="post">--%>
+<%--                    <input type="hidden" name="category_id" id="deleteCategoryId"/>--%>
+<%--                    <button type="submit" class="btn btn-danger">Delete</button>--%>
+<%--                </form>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+<%--<!-- Update Modal -->--%>
+<%--<div class="modal fade" id="updateOrderModal" tabindex="-1" role="dialog" aria-labelledby="updateOrderTitle" aria-hidden="true">--%>
+<%--    <div class="modal-dialog modal-dialog-centered" role="document">--%>
+<%--        <div class="modal-content">--%>
+<%--            <div class="modal-header">--%>
+<%--                <h5 class="modal-title" id="updateOrderTitle">Update order</h5>--%>
+<%--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
+<%--                    <span aria-hidden="true">&times;</span>--%>
+<%--                </button>--%>
+<%--            </div>--%>
+<%--            <div class="modal-body">--%>
+<%--                <form action="update-order" method="post" style="display:inline;">--%>
+<%--                    <input type="hidden" name="category-id" id="updateCategoryId"/>--%>
+<%--                    <div class="form-group">--%>
+<%--                        <input type="text" name="category-name" id="updateCategoryName" class="form-control"/>--%>
+<%--                    </div>--%>
+<%--                    <div class="form-check">--%>
+<%--                        <input class="form-check-input checkBox" type="checkbox" onchange="toggleCheckbox()">--%>
+<%--                        <label class="form-check-label">Sub order</label>--%>
+<%--                    </div>--%>
+<%--                    <div class="form-group parentId" style="display: none">--%>
+<%--                        <label>Enter order's product id</label>--%>
+<%--                        <input class="form-control" name="product-id" id="updateOrderProductId" type="number">--%>
+<%--                    </div>--%>
+<%--                    <div class="modal-footer primary-footer">--%>
+<%--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--%>
+<%--                        <button type="submit" class="btn btn-primary">Save</button>--%>
+<%--                    </div>--%>
+<%--                </form>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 
 <script src="js/category-list.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -1,16 +1,16 @@
 package org.pdp.controllers;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.eclipse.tags.shaded.org.apache.xpath.operations.Or;
-import org.pdp.Dao.*;
+import org.pdp.Dao.CartDao;
+import org.pdp.Dao.CategoryDao;
+import org.pdp.Dao.OrderDao;
+import org.pdp.Dao.ProductDao;
 import org.pdp.config.PostgresDatabaseConfig;
-import org.pdp.context.Context;
 
 import java.io.IOException;
 
