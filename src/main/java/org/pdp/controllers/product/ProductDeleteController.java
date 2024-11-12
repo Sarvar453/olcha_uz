@@ -1,4 +1,4 @@
-package org.pdp.controllers;
+package org.pdp.controllers.product;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,7 +10,7 @@ import org.pdp.Dao.ProductDao;
 import java.io.IOException;
 
 @WebServlet("/delete-product")
-public class ProductDeleteController extends HttpServlet {
+public class ProductDeleteController extends BaseProductController {
     private  final ProductDao productDao = new ProductDao();
 
     @Override

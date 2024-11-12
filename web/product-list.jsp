@@ -89,89 +89,104 @@
     <form method="post" action="switch">
       <div class="form-group">
         <input class="btn btn-primary" name="table-type" type="submit" value="Categories"/>
-        <%--<button class="btn btn-primary" name="table-type" type="submit">Categories</button>--%>
       </div>
       <div class="form-group">
         <input class="btn btn-primary" name="table-type" type="submit" value="Products"/>
-        <%--<button class="btn btn-primary" name="table-type" type="submit">Products</button>--%>
       </div>
       <div class="form-group">
-        <input class="btn btn-primary" name="table-type" type="submit" value="Carts"/>
-        <%--<button class="btn btn-primary" name="table-type" type="submit">Carts</button>--%>
-      </div>
+        <input class="btn btn-primary" name="table-type" type="submit" value="Carts"/></div>
       <div class="form-group">
         <input class="btn btn-primary" name="table-type" type="submit" value="Orders"/>
-        <%--<button class="btn btn-primary" name="table-type" type="submit">Orders</button>--%>
       </div>
     </form>
   </div>
   <div class="right-column">
-    <button type="submit" class="btn btn-info add-category" data-toggle="modal" data-target="#addCategoryModal" <c:if test="${userPermission != 'CREATE' && userPermission !='ALL'}">disabled</c:if>>Add category</button>
+    <button type="submit" class="btn btn-info add-category" data-toggle="modal" data-target="#addCategoryModal" <c:if test="${userPermission != 'CREATE' && userPermission !='ALL'}">disabled</c:if>>Add product</button>
     <c:if test="${empty list}">
       <h3>No products found.</h3>
     </c:if>
-    <c:forEach items="${list}" var="product">
-    <table class="table table-bordered">
-      <thead class="thead-dark">
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Parent ID</th>
-        <th scope="col">Created at</th>
-        <th scope="col">Modified at</th>
-        <th scope="col">Created by</th>
-        <th scope="col">Modified by</th>
-        <th scope="col">active</th>
-        <th scope="col">action</th>
-      </tr>
-      </thead>
-      <tbody>
+
+    <c:if test="${!empty list}">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
         <tr>
-          <th scope="row">${product.getId()}</th>
-          <th>${product.getCategoryId()}</th>
-          <td>${product.getName()}</td>
-          <td>${category.getPrice()}</td>
-          <td>${category.getCreatedAt()}</td>
-          <td>${category.getModifiedAt()}</td>
-          <td>${category.getCreatedBy()}</td>
-          <td>${category.getModifiedBy()}</td>
-          <td>${category.getActive()}</td>
-          <td class="td-gap">
-            <button class="btn btn-primary update-button" type="button" data-toggle="modal" data-target="#updateCategoryModal"
-                    onclick="setUpdateCategoryParams('${category.id}', '${category.name}', '${category.parentId}')" <c:if test="${userPermission != 'UPDATE' && userPermission != 'ALL'}">disabled</c:if>>
-              Update
-            </button>
-            <button class="btn btn-danger delete-button" type="button" data-toggle="modal" data-target="#deleteCategoryModal" onclick="setDeleteCategoryId(${category.getId()})" <c:if test="${userPermission != 'DELETE' && userPermission != 'ALL'}">disabled</c:if>>Delete</button>
-          </td>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Description</th>
+          <th scope="col">Discount</th>
+          <th scope="col">From delivery</th>
+          <th scope="col">To delivery</th>
+          <th scope="col">Created at</th>
+          <th scope="col">Modified at</th>
+          <th scope="col">Created by</th>
+          <th scope="col">Modified by</th>
+          <th scope="col">action</th>
         </tr>
-      </tbody>
-    </table>
-    </c:forEach>
+        </thead>
+        <tbody>
+        <c:forEach items="${list}" var="product">
+          <tr>
+            <th scope="row">${product.getId()}</th>
+            <td>${product.getName()}</td>
+            <td>${product.getPrice()}</td>
+            <td>${product.getDescription()}</td>
+            <td>${product.getDiscount()}</td>
+            <td>${product.getFromDelivery()}</td>
+            <td>${product.getToDelivery()}</td>
+            <td>${product.getCreatedAt()}</td>
+            <td>${product.getModifiedAt()}</td>
+            <td>${product.getCreatedBy()}</td>
+            <td>${product.getModifiedBy()}</td>
+            <td class="td-gap">
+              <button class="btn btn-primary update-button" type="button" data-toggle="modal" data-target="#updateCategoryModal"
+                      onclick="setUpdateProductParams('${product.getId}', '${product.getName}', '${product.getPrice}','${product.getDescription}','${product.getDiscount}','${product.getFromDelivery}','${product.getToDelivery}')" <c:if test="${userPermission != 'UPDATE' && userPermission != 'ALL'}">disabled</c:if>>
+                Update
+              </button>
+              <button class="btn btn-danger delete-button" type="button" data-toggle="modal" data-target="#deleteCategoryModal" onclick="setDeleteProductId(${product.getId()})" <c:if test="${userPermission != 'DELETE' && userPermission != 'ALL'}">disabled</c:if>>Delete</button>
+            </td>
+          </tr>
+        </c:forEach>
+        </tbody>
+      </table>
+    </c:if>
   </div>
 </div>
-<!-- Category add Modal -->
+<!-- Product add Modal -->
 <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Add category</h5>
+        <h5 class="modal-title">Add product</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="add-category" method="post">
+        <form action="add-product" method="post">
           <div class="form-group">
-            <label>Enter name of the category</label>
-            <input class="form-control" name="category_name" type="text" placeholder="Category name" required>
+            <label class="form-check-label">Enter name</label>
+            <input type="text" name="product-name" class="form-control" required/>
           </div>
-          <div class="form-check">
-            <input class="form-check-input checkBox" type="checkbox" onchange="toggleCheckbox()">
-            <label class="form-check-label">Sub category</label>
+          <div class="form-group">
+            <label class="form-check-label">Enter price</label>
+            <input type="text" name="product-price" class="form-control" required/>
           </div>
-          <div class="form-group parentId" style="display: none">
-            <label>Enter category's parent id</label>
-            <input class="form-control" name="parent_id" type="number" placeholder="Parent id">
+          <div class="form-group">
+            <label class="form-check-label">Enter description</label>
+            <input type="text" name="product-description" class="form-control" required/>
+          </div>
+          <div class="form-group">
+            <label class="form-check-label">Enter discount</label>
+            <input type="number" name="product-discount" class="form-control" required/>
+          </div>
+          <div class="form-group">
+            <label class="form-check-label">Enter from delivery</label>
+            <input type="text" name="product-from_delivery" class="form-control" required/>
+          </div>
+          <div class="form-group">
+            <label class="form-check-label">Enter to delivery</label>
+            <input type="text" name="product-to_delivery" class="form-control" required/>
           </div>
           <div class="modal-footer primary-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -193,12 +208,12 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>You really want to delete this category?<br>All products and subcategories depending on this category also will be removed!</p>
+        <p>You really want to delete this product?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <form action="delete-category" method="post">
-          <input type="hidden" name="category_id" id="deleteCategoryId"/>
+        <form action="delete-product" method="post">
+          <input type="hidden" name="product_id" id="deleteProductId"/>
           <button type="submit" class="btn btn-danger">Delete</button>
         </form>
       </div>
@@ -216,19 +231,31 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="update-category" method="post" style="display:inline;">
+        <form action="update-product" method="post" style="display:inline;">
           <input type="hidden" name="category-id" id="updateCategoryId"/>
-
           <div class="form-group">
-            <input type="text" name="category-name" id="updateCategoryName" class="form-control"/>
+            <label class="form-check-label">Enter new name</label>
+            <input type="text" name="product-name" id="updateProductName" class="form-control"/>
           </div>
-          <div class="form-check">
-            <input class="form-check-input checkBox" type="checkbox" onchange="toggleCheckbox()">
-            <label class="form-check-label">Sub category</label>
+          <div class="form-group">
+            <label class="form-check-label">Enter new price</label>
+            <input type="text" name="product-price" id="updateProductPrice" class="form-control"/>
           </div>
-          <div class="form-group parentId" style="display: none">
-            <label>Enter category's parent id</label>
-            <input class="form-control" name="parent-id" id="updateCategoryParentId" type="number">
+          <div class="form-group">
+            <label class="form-check-label">Enter new description</label>
+            <input type="text" name="product-description" id="updateProductDescription" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label class="form-check-label">Enter new discount</label>
+            <input type="number" name="product-discount" id="updateProductDiscount" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label class="form-check-label">Enter new from delivery</label>
+            <input type="text" name="product-from_delivery" id="updateProductFromDelivery" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label class="form-check-label">Enter new to delivery</label>
+            <input type="text" name="product-to_delivery" id="updateProductToDelivery" class="form-control"/>
           </div>
           <div class="modal-footer primary-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -240,37 +267,7 @@
   </div>
 </div>
 
-<script>
-  function toggleCheckbox() {
-    const checkBoxes = document.querySelectorAll(".checkBox");
-    const parentIds = document.querySelectorAll(".parentId");
-
-    checkBoxes.forEach((checkBox, index) => {
-      if (checkBox.checked) {
-        parentIds[index].style.display = "block";
-      } else {
-        parentIds[index].style.display = "none";
-      }
-    });
-  }
-  function setDeleteCategoryId(categoryId) {
-    document.getElementById('deleteCategoryId').value = categoryId;
-  }
-  function setUpdateCategoryParams(categoryId, categoryName, parentId) {
-    document.getElementById('updateCategoryId').value = categoryId;
-    document.getElementById('updateCategoryName').value = categoryName;
-    const parentIdField = document.getElementById('updateCategoryParentId');
-    if (parentId) {
-      document.querySelector(".checkBox").checked = true;
-      parentIdField.value = parentId;
-      document.querySelector(".parentId").style.display = "block";
-    } else {
-      document.querySelector(".checkBox").checked = false;
-      parentIdField.value = "";
-      document.querySelector(".parentId").style.display = "none";
-    }
-  }
-</script>
+<script src="js/product-list.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

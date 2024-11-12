@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BaseController extends HttpServlet {
 
-    protected String getUsernameFromCookie(HttpServletRequest request) {
+    protected static String getUsernameFromCookie(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("username")) {

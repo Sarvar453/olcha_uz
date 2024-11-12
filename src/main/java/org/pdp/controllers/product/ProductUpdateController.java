@@ -1,4 +1,4 @@
-package org.pdp.controllers;
+package org.pdp.controllers.product;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -12,7 +12,7 @@ import org.pdp.entity.Product;
 import java.io.IOException;
 
 @WebServlet("/update-product")
-public class ProductUpdateController extends HttpServlet {
+public class ProductUpdateController extends BaseProductController {
     private final ProductDao productDao = new ProductDao();
 
     @Override
@@ -22,7 +22,7 @@ public class ProductUpdateController extends HttpServlet {
         double price = Double.parseDouble(req.getParameter("price"));
         int categoryId = Integer.parseInt(req.getParameter("category_id"));
 
-        Product product = new Product(productId, categoryId, name, price, false, null, null);
+        Product product = new Product();
         productDao.updateProduct(product);
 
         req.setAttribute("list", productDao.getProducts());
