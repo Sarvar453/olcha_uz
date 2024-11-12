@@ -58,7 +58,7 @@
     <form action="login" method="post">
         <div class="form-group">
             <label>Username</label>
-            <input class="form-control" name="name" type="text" placeholder="Enter your username" required>
+            <input class="form-control" name="username" type="text" placeholder="Enter your username" required>
         </div>
 
         <div class="form-group">

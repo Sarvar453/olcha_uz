@@ -13,6 +13,7 @@ import java.sql.SQLException;
 public class User {
     private Integer id;
     private String name;
+    private String username;
     private String phone_number;
     private String password;
     private String email;
