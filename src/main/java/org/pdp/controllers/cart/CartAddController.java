@@ -22,7 +22,7 @@ public class CartAddController extends HttpServlet {
         int quantity = Integer.parseInt(quantityParam);
         Integer productId = productIdParam != null ? Integer.parseInt(productIdParam) : null;
 
-        Cart cart = new Cart(0, 0, 0, 0, false, null, null);
+        Cart cart = new Cart(0, 0, 0, 0, false, null,null);
         cartDao.addCart(cart);
         req.setAttribute("list", cartDao.getCarts());
         RequestDispatcher dispatcher = req.getRequestDispatcher("cart-list.jsp");
