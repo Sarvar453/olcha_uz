@@ -9,7 +9,7 @@ import org.pdp.Dao.CategoryDao;
 
 import java.io.IOException;
 
-@WebServlet("/category-list")
+@WebServlet("/admin/category-list")
 public class CategoryListController extends HttpServlet {
     private final CategoryDao categoryDao = new CategoryDao();
 

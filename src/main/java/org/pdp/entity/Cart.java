@@ -21,6 +21,7 @@ public class Cart {
     private Date created_date;
     private Date updated_date;
 
+
     public Cart(ResultSet resultSet) throws SQLException {
         this.id = resultSet.getInt("id");
         this.user_id = resultSet.getInt("user_id");
@@ -29,4 +30,5 @@ public class Cart {
         this.created_date = resultSet.getDate("created_date");
         this.updated_date = resultSet.getDate("updated_date");
     }
+
 }

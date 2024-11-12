@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
             Context.setCurrentUser(user);
             req.setAttribute("userPermission", user.getPermission());
             addUsernameToCookie(resp, username);
-            resp.sendRedirect("/category-list");
+            resp.sendRedirect("/admin/category-list");
         } else {
             req.setAttribute("error", "Invalid username or password. Please try again.");
             RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");
