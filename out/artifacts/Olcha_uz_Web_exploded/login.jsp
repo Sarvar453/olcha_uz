@@ -60,12 +60,10 @@
             <label>Username</label>
             <input class="form-control" name="username" type="text" placeholder="Enter your username" required>
         </div>
-
         <div class="form-group">
             <label>Password</label>
             <input class="form-control" name="password" type="password" placeholder="Enter your password">
         </div>
-
         <div class="form-group button">
             <button class="btn btn-primary" type="submit" >Next</button>
         </div>

@@ -86,20 +86,10 @@
 <body>
 <div class="container">
   <div class="left-column">
-    <form method="post" action="switch">
-      <div class="form-group">
-        <input class="btn btn-primary" name="table-type" type="submit" value="Categories"/>
-      </div>
-      <div class="form-group">
-        <input class="btn btn-primary" name="table-type" type="submit" value="Products"/>
-      </div>
-      <div class="form-group">
-        <input class="btn btn-primary" name="table-type" type="submit" value="Carts"/>
-      </div>
-      <div class="form-group">
-        <input class="btn btn-primary" name="table-type" type="submit" value="Orders"/>
-      </div>
-    </form>
+    <a class="switch-button" href="category-list">Categories</a>
+    <a class="switch-button" href="product-list">Products</a>
+    <a class="switch-button" href="cart-list">Carts</a>
+    <a class="switch-button" href="order-list">Orders</a>
   </div>
   <div class="right-column">
     <button type="submit" class="btn btn-info add-category" data-toggle="modal" data-target="#addCategoryModal" <c:if test="${userPermission != 'CREATE' && userPermission != 'ALL'}">disabled</c:if>>Add category</button>

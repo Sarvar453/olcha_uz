@@ -32,18 +32,18 @@ public class SwitchController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("table-type").equals("Categories")){
-            resp.sendRedirect("/category-list");
-        }
-        else if (req.getParameter("table-type").equals("Products")){
-            resp.sendRedirect("/product-list");
-        }
-        else if (req.getParameter("table-type").equals("Orders")){
+        String tableType = req.getParameter("table-type");
 
+        if ("Categories".equals(tableType)){
+            resp.sendRedirect("/category-list");
+        } else if ("Products".equals(tableType)){
+            resp.sendRedirect("/product-list");
+        } else if ("Orders".equals(tableType)){
             resp.sendRedirect("/order-list");
-        }
-        else if (req.getParameter("table-type").equals("Carts")){
+        } else if ("Carts".equals(tableType)){
             resp.sendRedirect("/cart-list");
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid table type");
         }
     }
 }

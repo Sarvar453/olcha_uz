@@ -18,6 +18,6 @@ public class CategoryListController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("list", categoryDao.getCategories());
         req.setAttribute("userPermission", Context.getCurrentUser().getPermission());
-        req.getRequestDispatcher("category-list.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/category-list.jsp").forward(req, resp);
     }
 }

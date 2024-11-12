@@ -12,7 +12,7 @@ import org.pdp.context.Context;
 
 import java.io.IOException;
 
-@WebServlet("/product-list")
+@WebServlet("/admin/product-list")
 public class ProductListController extends HttpServlet {
     private ProductDao productDao;
 
@@ -25,6 +25,6 @@ public class ProductListController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("list", productDao.getProducts());
         req.setAttribute("userPermission", Context.getCurrentUser().getPermission());
-        req.getRequestDispatcher("admin/product-list.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/product-list.jsp").forward(req, resp);
     }
 }
