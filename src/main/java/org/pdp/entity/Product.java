@@ -1,5 +1,6 @@
 package org.pdp.entity;
 
+import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,26 +8,77 @@ import lombok.NoArgsConstructor;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class Product {
-    private int id;
-    private int categoryId;
+    private Integer id;
     private String name;
-    private double price;
-    private boolean active;
-    private Date created_date;
-    private Date updated_date;
+    private Double price;
+    private String images;
+    private String params;
+    private String color;
+    private String description;
+    private Integer discount;
+    private Date fromDelivery;
+    private Date toDelivery;
+    private Timestamp createdAt;
+    private Timestamp modifiedAt;
+    private String createdBy;
+    private String modifiedBy;
+    private Boolean active;
 
     public Product(ResultSet resultSet) throws SQLException {
         this.id = resultSet.getInt("id");
         this.name = resultSet.getString("name");
         this.price = resultSet.getDouble("price");
+        this.images = resultSet.getString("images");
+        this.params = resultSet.getString("params");
+        this.color = resultSet.getString("color");
+        this.description = resultSet.getString("description");
+        this.discount = resultSet.getInt("discount");
+        this.fromDelivery = resultSet.getDate("from_delivery");
+        this.fromDelivery = resultSet.getDate("from_delivery");
+        this.createdAt = resultSet.getTimestamp("created_at");
+        this.modifiedAt = resultSet.getTimestamp("modified_at");
+        this.createdBy = resultSet.getString("created_by");
+        this.modifiedBy = resultSet.getString("modified_by");
         this.active = resultSet.getBoolean("active");
-        this.categoryId = resultSet.getInt("category_id");
-        this.created_date = resultSet.getDate("created_date");
-        this.updated_date = resultSet.getDate("updated_date");
+    }
+    public Product(String name, Double price, String images, String params, String color, String description, Integer discount, Date fromDelivery, Date toDelivery, String createdBy){
+        this.name = name;
+        this.price = price;
+        this.images = images;
+        this.params = params;
+        this.color = color;
+        this.description = description;
+        this.discount = discount;
+        this.fromDelivery = fromDelivery;
+        this.toDelivery = toDelivery;
+        this.createdBy = createdBy;
+    }
+    public Product(Integer id,String name, Double price, String images, String params, String color, String description, Integer discount, Date fromDelivery, Date toDelivery, String createdBy){
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.images = images;
+        this.params = params;
+        this.color = color;
+        this.description = description;
+        this.discount = discount;
+        this.fromDelivery = fromDelivery;
+        this.toDelivery = toDelivery;
+        this.createdBy = createdBy;
+    }
+    public Product(String name, Double price, String description, Integer discount, Date fromDelivery, Date toDelivery, String createdBy){
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.discount = discount;
+        this.fromDelivery = fromDelivery;
+        this.toDelivery = toDelivery;
+        this.createdBy = createdBy;
     }
 }

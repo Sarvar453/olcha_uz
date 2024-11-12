@@ -22,7 +22,7 @@ public class ProductUpdateController extends HttpServlet {
         double price = Double.parseDouble(req.getParameter("price"));
         int categoryId = Integer.parseInt(req.getParameter("category_id"));
 
-        Product product = new Product(productId, categoryId, name, price, false, null, null);
+        Product product = new Product();
         productDao.updateProduct(product);
 
         req.setAttribute("list", productDao.getProducts());

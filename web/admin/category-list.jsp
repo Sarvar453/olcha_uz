@@ -89,24 +89,20 @@
     <form method="post" action="switch">
       <div class="form-group">
         <input class="btn btn-primary" name="table-type" type="submit" value="Categories"/>
-        <%--<button class="btn btn-primary" name="table-type" type="submit">Categories</button>--%>
       </div>
       <div class="form-group">
         <input class="btn btn-primary" name="table-type" type="submit" value="Products"/>
-        <%--<button class="btn btn-primary" name="table-type" type="submit">Products</button>--%>
       </div>
       <div class="form-group">
         <input class="btn btn-primary" name="table-type" type="submit" value="Carts"/>
-        <%--<button class="btn btn-primary" name="table-type" type="submit">Carts</button>--%>
       </div>
       <div class="form-group">
         <input class="btn btn-primary" name="table-type" type="submit" value="Orders"/>
-        <%--<button class="btn btn-primary" name="table-type" type="submit">Orders</button>--%>
       </div>
     </form>
   </div>
   <div class="right-column">
-    <button type="submit" class="btn btn-info add-category" data-toggle="modal" data-target="#addCategoryModal" >Add category</button>
+    <button type="submit" class="btn btn-info add-category" data-toggle="modal" data-target="#addCategoryModal" <c:if test="${userPermission != 'CREATE' && userPermission != 'ALL'}">disabled</c:if>>Add category</button>
     <c:if test="${empty list}">
       <h3>No categories found.</h3>
     </c:if>
@@ -140,12 +136,12 @@
             <td class="td-gap">
               <button class="btn btn-primary update-button" type="button" data-toggle="modal" data-target="#updateCategoryModal"
                       onclick="setUpdateCategoryParams('${category.id}', '${category.name}', '${category.parentId}')"
-                ${userPermission != 'UPDATE' && userPermission != 'ALL' ? '' : ''}>
+                      <c:if test="${userPermission != 'UPDATE' && userPermission != 'ALL'}">disabled</c:if>>
                 Update
               </button>
               <button class="btn btn-danger delete-button" type="button" data-toggle="modal" data-target="#deleteCategoryModal"
                       onclick="setDeleteCategoryId(${category.getId()})"
-                ${userPermission != 'DELETE' && userPermission != 'ALL' ? 'disabled' : ''}>
+                      <c:if test="${userPermission != 'DELETE' && userPermission != 'ALL'}">disabled</c:if>>
                 Delete
               </button>
             </td>

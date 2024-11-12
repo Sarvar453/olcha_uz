@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,8 +14,8 @@ public class Category {
     private Integer id;
     private String name;
     private Integer parentId;
-    private String createdAt;
-    private String modifiedAt;
+    private Timestamp createdAt;
+    private Timestamp modifiedAt;
     private String createdBy;
     private String modifiedBy;
     private Boolean active;
@@ -23,9 +24,9 @@ public class Category {
         this.id = resultSet.getInt("id");
         this.name = resultSet.getString("name");
         this.parentId = resultSet.getInt("parent_id");
-        this.createdAt = resultSet.getString("created_at");
+        this.createdAt = resultSet.getTimestamp("created_at");
         this.createdBy = resultSet.getString("created_by");
-        this.modifiedAt = resultSet.getString("modified_at");
+        this.modifiedAt = resultSet.getTimestamp("modified_at");
         this.modifiedBy = resultSet.getString("modified_by");
         this.active = resultSet.getBoolean("active");
     }

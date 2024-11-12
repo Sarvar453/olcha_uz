@@ -20,7 +20,7 @@ import java.sql.SQLException;
 public class UserRegController extends HttpServlet {
     private final PostgresDatabaseConfig postgresDatabaseConfig = new PostgresDatabaseConfig();
     private final UserDao userDao = new UserDao();
-    private static final String SIGN_UP = "select * from create_user(?, ?, ?, ?, ?, ?)";
+    private static final String SIGN_UP = "select * from create_user(?, ?, ?, ?, ?, ?, ?)";
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         RequestDispatcher dispatcher = req.getRequestDispatcher("sign-up.jsp");
@@ -28,7 +28,8 @@ public class UserRegController extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String createUsername = req.getParameter("name");
+        String createName = req.getParameter("name");
+        String createUsername = req.getParameter("username");
         String createPhone_number = req.getParameter("phone-number");
         String createPassword = req.getParameter("create-password");
         String createEmail = req.getParameter("email");
@@ -38,12 +39,13 @@ public class UserRegController extends HttpServlet {
         if (createPassword.equals(confirmPassword)) {
             try (Connection connect = postgresDatabaseConfig.connect();
                  PreparedStatement preparedStatement = connect.prepareStatement(SIGN_UP)) {
-                preparedStatement.setString(1, createUsername);
-                preparedStatement.setString(2, createPhone_number);
-                preparedStatement.setString(3, createPassword);
-                preparedStatement.setString(4, createEmail);
-                preparedStatement.setString(5, createRole);
-                preparedStatement.setString(6, createPermission);
+                preparedStatement.setString(1, createName);
+                preparedStatement.setString(2, createUsername);
+                preparedStatement.setString(3, createPhone_number);
+                preparedStatement.setString(4, createPassword);
+                preparedStatement.setString(5, createEmail);
+                preparedStatement.setString(6, createRole);
+                preparedStatement.setString(7, createPermission);
 
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if (resultSet.next()) {
