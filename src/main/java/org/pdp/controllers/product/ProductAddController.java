@@ -15,7 +15,7 @@ import org.pdp.service.ProductService;
 import java.io.IOException;
 import java.sql.Date;
 
-@WebServlet("/add-product")
+@WebServlet("/admin/add-product")
 public class ProductAddController extends HttpServlet {
     private ProductService productService;
     @Override
@@ -29,9 +29,13 @@ public class ProductAddController extends HttpServlet {
         Double productPrice = Double.parseDouble(req.getParameter("product-price"));
         String productDescription = req.getParameter("product-description");
         String productDiscount = req.getParameter("product-discount");
-        Date productFromDelivery = Date.valueOf(req.getParameter("product-from_delivery")) ;
-        Date productToDelivery = Date.valueOf(req.getParameter("product-to_delivery"));
-        productService.addProduct(productName,productPrice,productDescription,productDiscount,productFromDelivery,productToDelivery,username);
+        String productFromDelivery = req.getParameter("product-from_delivery");
+        String productToDelivery = req.getParameter("product-to_delivery");
+        String productImages = req.getParameter("imageJsonData");
+        String productParams = req.getParameter("paramJsonData");
+        String productColor = req.getParameter("colorJsonData");
+
+        productService.addProduct(productName,productPrice,productImages,productParams,productColor,productDescription,productDiscount,productFromDelivery,productToDelivery,username);
         resp.sendRedirect("/admin/product-list");
     }
 }

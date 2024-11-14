@@ -9,7 +9,7 @@ import org.pdp.Dao.ProductDao;
 
 import java.io.IOException;
 
-@WebServlet("/delete-product")
+@WebServlet("/admin/delete-product")
 public class ProductDeleteController extends HttpServlet {
     private  final ProductDao productDao = new ProductDao();
 
@@ -19,8 +19,7 @@ public class ProductDeleteController extends HttpServlet {
         if(productIdParam != null && !productIdParam.isEmpty()) {
             int productId = Integer.parseInt(productIdParam);
             productDao.deleteProduct(productId);
-
         }
-        resp.sendRedirect("/product-list.jsp");
+        resp.sendRedirect("/admin/product-list");
     }
 }

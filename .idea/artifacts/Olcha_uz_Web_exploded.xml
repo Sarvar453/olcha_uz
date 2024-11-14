@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="Olcha.uz:Web exploded">
+  <artifact type="exploded-war" build-on-make="true" name="Olcha.uz:Web exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/Olcha_uz_Web_exploded</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="Olcha.uz/web/Web" />

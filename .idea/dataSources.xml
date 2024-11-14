@@ -13,7 +13,7 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="olcha_uz@10.10.2.140" uuid="3fd451dc-0cee-4f41-af36-fc4b1afd318d">
+    <data-source source="LOCAL" name="olcha_uz@10.10.2.160" uuid="3fd451dc-0cee-4f41-af36-fc4b1afd318d">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>

@@ -22,8 +22,8 @@ public class Product {
     private String color;
     private String description;
     private Integer discount;
-    private Date fromDelivery;
-    private Date toDelivery;
+    private String fromDelivery;
+    private String toDelivery;
     private Timestamp createdAt;
     private Timestamp modifiedAt;
     private String createdBy;
@@ -39,15 +39,15 @@ public class Product {
         this.color = resultSet.getString("color");
         this.description = resultSet.getString("description");
         this.discount = resultSet.getInt("discount");
-        this.fromDelivery = resultSet.getDate("from_delivery");
-        this.fromDelivery = resultSet.getDate("from_delivery");
+        this.fromDelivery = resultSet.getString("from_delivery");
+        this.fromDelivery = resultSet.getString("from_delivery");
         this.createdAt = resultSet.getTimestamp("created_at");
         this.modifiedAt = resultSet.getTimestamp("modified_at");
         this.createdBy = resultSet.getString("created_by");
         this.modifiedBy = resultSet.getString("modified_by");
         this.active = resultSet.getBoolean("active");
     }
-    public Product(String name, Double price, String images, String params, String color, String description, Integer discount, Date fromDelivery, Date toDelivery, String createdBy){
+    public Product(String name, Double price, String images, String params, String color, String description, Integer discount, String fromDelivery, String toDelivery, String createdBy){
         this.name = name;
         this.price = price;
         this.images = images;
@@ -59,7 +59,7 @@ public class Product {
         this.toDelivery = toDelivery;
         this.createdBy = createdBy;
     }
-    public Product(Integer id,String name, Double price, String images, String params, String color, String description, Integer discount, Date fromDelivery, Date toDelivery, String createdBy){
+    public Product(Integer id,String name, Double price, String images, String params, String color, String description, Integer discount, String fromDelivery, String toDelivery, String createdBy){
         this.id = id;
         this.name = name;
         this.price = price;
@@ -72,7 +72,7 @@ public class Product {
         this.toDelivery = toDelivery;
         this.createdBy = createdBy;
     }
-    public Product(String name, Double price, String description, Integer discount, Date fromDelivery, Date toDelivery, String createdBy){
+    public Product(String name, Double price, String description, Integer discount, String fromDelivery, String toDelivery, String createdBy){
         this.name = name;
         this.price = price;
         this.description = description;

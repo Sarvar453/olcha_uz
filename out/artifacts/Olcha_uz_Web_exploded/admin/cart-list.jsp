@@ -9,6 +9,7 @@
     <title>Cart List</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
     <style>
         @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
         *{
@@ -33,7 +34,7 @@
             box-shadow: 0 5px 10px rgba(0,0,0,0.2);
             height: 700px;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             padding: 0;
         }
         .container form{
@@ -42,17 +43,31 @@
             padding-top: 15px;
             padding-left: 15px;
         }
-        .left-column{
-            border-right: 1px solid black;
-            width: 155px !important;
+        .top-row{
+            margin-left: 10px;
+            margin-top: 20px;
         }
-        .add-cart{
+        .switch-button{
+            color: #fff;
+            padding: 10px;
+            background: #0273e9;
+            border-radius: 5px;
+        }
+        .switch-button:hover{
+            text-decoration: none;
+            color: #fff;
+            background: #0069d9;
+        }
+        .add-category{
             width: 130px !important;
             margin-top: 15px;
             margin-bottom: 10px;
         }
-        .right-column{
-            margin-left: 40px;
+        .bottom-row{
+            margin-right: 20px;
+            margin-left: 10px;
+            margin-top: 10px;
+
         }
         .btn{
             width: 120px;
@@ -67,15 +82,61 @@
             width: 80px;
             border-radius: 0px 5px 5px 0px;
         }
-        .form-check{
-            margin-left: 5px;
-        }
-        .parentId{
-            margin-top: 15px;
+        .option-button{
+            width: 40px;
+            font-size: 14px;
         }
         .primary-footer{
             margin-top: 20px;
         }
+        .modal-body{
+            max-height: 550px;
+            overflow-y: auto;
+            --sb-track-color: #5a6268;
+            --sb-thumb-color: #0069d9;
+            --sb-size: 13px;
+        }
+        .modal-body::-webkit-scrollbar {
+            width: var(--sb-size);
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: var(--sb-track-color);
+            border-radius: 3px;
+        }
+        .modal-body::-webkit-scrollbar-thumb {
+            background: var(--sb-thumb-color);
+            border-radius: 3px;
+        }
+        @supports not selector(::-webkit-scrollbar) {
+            .modal-body {
+                scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+            }
+        }
+        .container{
+            max-height: 700px;
+            overflow-y: auto;
+            --sb-track-color: #5a6268;
+            --sb-thumb-color: #0069d9;
+            --sb-size: 13px;
+        }
+        .container::-webkit-scrollbar {
+            width: var(--sb-size);
+        }
+        .container::-webkit-scrollbar-track {
+            background: var(--sb-track-color);
+            border-radius: 3px;
+        }
+        .container::-webkit-scrollbar-thumb {
+            background: var(--sb-thumb-color);
+            border-radius: 3px;
+        }
+        @supports not selector(::-webkit-scrollbar) {
+            .container {
+                scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+            }
+        }
+
     </style>
 </head>
 <body>

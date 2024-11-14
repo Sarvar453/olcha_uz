@@ -36,7 +36,7 @@ public class AuthenticationFilter implements Filter {
 
     private void addUsernameToCookie(HttpServletResponse response, String username) {
         Cookie cookie = new Cookie("username", username);
-        cookie.setMaxAge(30);
+        cookie.setMaxAge(240);
         response.addCookie(cookie);
     }
 }

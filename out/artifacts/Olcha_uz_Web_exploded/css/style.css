@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgb(28, 100, 171);
+}
+.container{
+    max-width: 1450px;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+.container form{
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+.top-row{
+    margin-left: 10px;
+    margin-top: 20px;
+}
+.switch-button{
+    color: #fff;
+    padding: 10px;
+    background: #0273e9;
+    border-radius: 5px;
+}
+.switch-button:hover{
+    text-decoration: none;
+    color: #fff;
+    background: #0069d9;
+}
+.add-category{
+    width: 130px !important;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+.bottom-row{
+    margin-right: 20px;
+    margin-left: 10px;
+    margin-top: 10px;
+
+}
+.btn{
+    width: 120px;
+}
+.update-button{
+    font-size: 14px;
+    width: 80px;
+    border-radius: 5px 0px 0px 5px;
+}
+.delete-button{
+    font-size: 14px;
+    width: 80px;
+    border-radius: 0px 5px 5px 0px;
+}
+.option-button{
+    width: 40px;
+    font-size: 14px;
+}
+.primary-footer{
+    margin-top: 20px;
+}
+.modal-body{
+    max-height: 550px;
+    overflow-y: auto;
+    --sb-track-color: #5a6268;
+    --sb-thumb-color: #0069d9;
+    --sb-size: 13px;
+}
+.modal-body::-webkit-scrollbar {
+    width: var(--sb-size);
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 3px;
+}
+.modal-body::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 3px;
+}
+@supports not selector(::-webkit-scrollbar) {
+    .modal-body {
+        scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+}
+.container{
+    max-height: 700px;
+    overflow-y: auto;
+    --sb-track-color: #5a6268;
+    --sb-thumb-color: #0069d9;
+    --sb-size: 13px;
+}
+.container::-webkit-scrollbar {
+    width: var(--sb-size);
+}
+.container::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 3px;
+}
+.container::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 3px;
+}
+@supports not selector(::-webkit-scrollbar) {
+    .container {
+        scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+}
