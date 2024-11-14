@@ -227,9 +227,6 @@
                                 '${fn:escapeXml(product.getColor())}')">
                   <i class="fa-solid fa-bars"></i>
                 </button>
-
-
-
               </td>
             </tr>
           </c:forEach>

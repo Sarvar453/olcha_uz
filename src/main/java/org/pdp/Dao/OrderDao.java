@@ -11,7 +11,7 @@ import java.util.List;
 public class OrderDao {
     private final PostgresDatabaseConfig postgresDatabaseConfig = new PostgresDatabaseConfig();
     private final DatabaseConfig databaseConfig;
-    private static final String GET_ORDER_LIST = "SELECT * FROM read_order()";
+    private static final String GET_ORDER_LIST = "select * from orders";
 
     public OrderDao() {
         this.databaseConfig = new PostgresDatabaseConfig();

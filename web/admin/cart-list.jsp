@@ -1,24 +1,34 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: rakhimovabdulaziz
+  Date: 07/11/24
+  Time: 16:01
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="org.pdp.entity.Cart" %>
-<%@ page import="java.util.List" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cart List</title>
+    <title>Title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="plugins/fontawesome-free-6.6.0-web/css/all.css">
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
-        *{
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
-        body{
+
+        body {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -26,27 +36,39 @@
             justify-content: center;
             background: rgb(28, 100, 171);
         }
-        .container{
+
+        .container {
             max-width: 1450px;
             width: 100%;
             background: #fff;
             border-radius: 10px;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
             height: 700px;
             display: flex;
             flex-direction: column;
             padding: 0;
+            overflow-y: auto;
+            overflow-x: auto;
         }
-        .container form{
-            display: flex;
-            flex-direction: column;
-            padding-top: 15px;
-            padding-left: 15px;
+
+        .container::-webkit-scrollbar {
+            width: 13px;
         }
-        .top-row{
-            margin-left: 10px;
-            margin-top: 20px;
+
+        .container::-webkit-scrollbar-track {
+            background: #5a6268;
+            border-radius: 3px;
         }
+
+        .container::-webkit-scrollbar-thumb {
+            background: #0069d9;
+            border-radius: 3px;
+        }
+
+        .top-row {
+            margin: 20px 10px 0;
+        }
+
         .switch-button{
             color: #fff;
             padding: 10px;
@@ -58,249 +80,58 @@
             color: #fff;
             background: #0069d9;
         }
-        .add-category{
-            width: 130px !important;
-            margin-top: 15px;
-            margin-bottom: 10px;
-        }
-        .bottom-row{
-            margin-right: 20px;
-            margin-left: 10px;
-            margin-top: 10px;
-
-        }
-        .btn{
-            width: 120px;
-        }
-        .update-button{
-            font-size: 14px;
-            width: 80px;
-            border-radius: 5px 0px 0px 5px;
-        }
-        .delete-button{
-            font-size: 14px;
-            width: 80px;
-            border-radius: 0px 5px 5px 0px;
-        }
-        .option-button{
-            width: 40px;
-            font-size: 14px;
-        }
-        .primary-footer{
-            margin-top: 20px;
-        }
-        .modal-body{
-            max-height: 550px;
-            overflow-y: auto;
-            --sb-track-color: #5a6268;
-            --sb-thumb-color: #0069d9;
-            --sb-size: 13px;
-        }
-        .modal-body::-webkit-scrollbar {
-            width: var(--sb-size);
-        }
-
-        .modal-body::-webkit-scrollbar-track {
-            background: var(--sb-track-color);
-            border-radius: 3px;
-        }
-        .modal-body::-webkit-scrollbar-thumb {
-            background: var(--sb-thumb-color);
-            border-radius: 3px;
-        }
-        @supports not selector(::-webkit-scrollbar) {
-            .modal-body {
-                scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
-            }
-        }
-        .container{
-            max-height: 700px;
-            overflow-y: auto;
-            --sb-track-color: #5a6268;
-            --sb-thumb-color: #0069d9;
-            --sb-size: 13px;
-        }
-        .container::-webkit-scrollbar {
-            width: var(--sb-size);
-        }
-        .container::-webkit-scrollbar-track {
-            background: var(--sb-track-color);
-            border-radius: 3px;
-        }
-        .container::-webkit-scrollbar-thumb {
-            background: var(--sb-thumb-color);
-            border-radius: 3px;
-        }
-        @supports not selector(::-webkit-scrollbar) {
-            .container {
-                scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
-            }
+        .bottom-row {
+            margin: 10px 20px 0 10px;
         }
 
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="left-column">
-        <form method="post" action="switch">
-            <div class="form-group">
-                <input class="btn btn-primary" name="table-type" type="submit" value="Categories"/>
-            </div>
-            <div class="form-group">
-                <input class="btn btn-primary" name="table-type" type="submit" value="Products"/>
-            </div>
-            <div class="form-group">
-                <input class="btn btn-primary" name="table-type" type="submit" value="Carts"/>
-            </div>
-            <div class="form-group">
-                <input class="btn btn-primary" name="table-type" type="submit" value="Orders"/>
-            </div>
-        </form>
-    </div>
-    <div class="left-column">
+    <div class="top-row">
         <a class="switch-button" href="category-list">Categories</a>
         <a class="switch-button" href="product-list">Products</a>
         <a class="switch-button" href="cart-list">Carts</a>
         <a class="switch-button" href="order-list">Orders</a>
     </div>
-    <div class="right-column">
-        <button type="submit" class="btn btn-info add-cart" data-toggle="modal" data-target="#addCartModal">Add Cart</button>
+    <div class="bottom-row">
         <c:if test="${empty list}">
-            <h3>No carts found.</h3>
+            <h3>No products found.</h3>
         </c:if>
-        @@ -107,149 +73,43 @@
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">User ID</th>
-            <th scope="col">User</th>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">Product ID</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Created At</th>
-            <th scope="col">Modified At</th>
-            <th scope="col">Created By</th>
-            <th scope="col">Modified By</th>
-            <th scope="col">Active</th>
-            <th scope="col">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${list}" var="cart">
-            <tr>
-                <th scope="row">${cart.getId()}</th>
-                <td>${cart.getUserId()}</td>
-                <td>${cart.getUser().getUsername()}</td>
-                <td>${cart.getUser().getEmail()}</td>
-                <td>${cart.getUser().getName()}</td>
-                <td>${cart.getProductId()}</td>
-                <td>${cart.getQuantity()}</td>
-                <td>${cart.getCreatedAt()}</td>
-                <td>${cart.getModifiedAt()}</td>
-                <td>${cart.getCreatedBy()}</td>
-                <td>${cart.getModifiedBy()}</td>
-                <td>${cart.getActive()}</td>
-                <td class="td-gap">
-                    <button class="btn btn-primary update-button" type="button" data-toggle="modal" data-target="#updateCartModal"
-                            onclick="setUpdateCartParams('${cart.id}', '${cart.userId}', '${cart.productId}', '${cart.quantity}')">
-                        Update
-                    </button>
-                    <button class="btn btn-danger delete-button" type="button" data-toggle="modal" data-target="#deleteCartModal"
-                            onclick="setDeleteCartId(${cart.getId()})">
-                        Delete
-                    </button>
-                </td>
-                <td>${cart.isActive()}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-        </table>
+        <c:if test="${!empty list}">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">User id</th>
+                    <th scope="col">Product id</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Created at</th>
+                    <th scope="col">Modified at</th>
+                    <th scope="col">Created by</th>
+                    <th scope="col">Modified by</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${list}" var="cart">
+                    <tr>
+                        <th scope="row">${cart.getId()}</th>
+                        <td>${cart.getUser_id()}</td>
+                        <td>${cart.getProduct_id()}</td>
+                        <td>${cart.getCreatedAt()}</td>
+                        <td>${cart.getModifiedAt()}</td>
+                        <td>${cart.getCreatedBy()}</td>
+                        <td>${cart.getModifiedBy()}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
         </c:if>
     </div>
 </div>
-<div class="modal fade" id="addCartModal" tabindex="-1" role="dialog" aria-labelledby="addCartTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add Cart</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="add-cart" method="post">
-                    <div class="form-group">
-                        <label>Enter User ID</label>
-                        <input class="form-control" name="user_id" type="number" placeholder="User ID" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Enter Product ID</label>
-                        <input class="form-control" name="product_id" type="number" placeholder="Product ID" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Enter Quantity</label>
-                        <input class="form-control" name="quantity" type="number" placeholder="Quantity" required>
-                    </div>
-                    <div class="modal-footer primary-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="updateCartModal" tabindex="-1" role="dialog" aria-labelledby="updateCartTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Update Cart</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="update-cart" method="post">
-                    <input type="hidden" name="id" id="updateCartId"/>
-                    <div class="form-group">
-                        <label>Enter User ID</label>
-                        <input class="form-control" name="user_id" id="updateUserId" type="number" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Enter Product ID</label>
-                        <input class="form-control" name="product_id" id="updateProductId" type="number" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Enter Quantity</label>
-                        <input class="form-control" name="quantity" id="updateQuantity" type="number" required>
-                    </div>
-                    <div class="modal-footer primary-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0jpJImVIn5QjKJ5rZ2I7sH37lg0HL90wnnM0jmj54FqKlzUy" crossorigin="anonymous"></script>
-
-<script>
-    function setDeleteCartId(cartId) {
-        document.getElementById('deleteCartId').value = cartId;
-    }
-
-    function setUpdateCartParams(id, userId, productId, quantity) {
-        document.getElementById('updateCartId').value = id;
-        document.getElementById('updateUserId').value = userId;
-        document.getElementById('updateProductId').value = productId;
-        document.getElementById('updateQuantity').value = quantity;
-    }
-</script>
-
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
+
