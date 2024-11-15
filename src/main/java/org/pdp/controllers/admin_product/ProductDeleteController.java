@@ -1,4 +1,4 @@
-package org.pdp.controllers.product;
+package org.pdp.controllers.admin_product;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 @Data
 public class Product {
     private Integer id;
+    private Integer categoryId;
     private String name;
     private Double price;
     private String images;
@@ -47,7 +48,8 @@ public class Product {
         this.modifiedBy = resultSet.getString("modified_by");
         this.active = resultSet.getBoolean("active");
     }
-    public Product(String name, Double price, String images, String params, String color, String description, Integer discount, String fromDelivery, String toDelivery, String createdBy){
+    public Product(String name, Double price, String images, String params, String color, String description, Integer discount, String fromDelivery, String toDelivery, String createdBy,Integer categoryId){
+        this.categoryId = categoryId;
         this.name = name;
         this.price = price;
         this.images = images;
@@ -59,8 +61,9 @@ public class Product {
         this.toDelivery = toDelivery;
         this.createdBy = createdBy;
     }
-    public Product(Integer id,String name, Double price, String images, String params, String color, String description, Integer discount, String fromDelivery, String toDelivery, String createdBy){
+    public Product(Integer id,Integer categoryId,String name, Double price, String images, String params, String color, String description, Integer discount, String fromDelivery, String toDelivery, String createdBy){
         this.id = id;
+        this.categoryId = categoryId;
         this.name = name;
         this.price = price;
         this.images = images;

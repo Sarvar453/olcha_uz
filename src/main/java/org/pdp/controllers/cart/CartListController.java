@@ -20,6 +20,6 @@ public class CartListController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("list", cartDao.getCarts());
         req.setAttribute("userPermission", Context.getCurrentUser().getPermission());
-        req.getRequestDispatcher("/admin/cart-list.jsp").forward(req, resp);
+        req.getRequestDispatcher("cart-list.jsp").forward(req, resp);
     }
 }

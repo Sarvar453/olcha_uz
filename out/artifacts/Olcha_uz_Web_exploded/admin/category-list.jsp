@@ -218,8 +218,11 @@
             <label class="form-check-label">Sub category</label>
           </div>
           <div class="form-group parentId" style="display: none">
-            <label>Enter category's parent id</label>
-            <input class="form-control" name="parent_id" type="number" placeholder="Parent id">
+            <label class="form-check-label">Enter category</label>
+            <input type="hidden" name="parent_id" id="categoryId"/>
+            <select id="categorySelect" name="category" class="form-control" onclick="getCategoryListByFetch()">
+              <!-- Options will be added here dynamically -->
+            </select>
           </div>
           <div class="modal-footer primary-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

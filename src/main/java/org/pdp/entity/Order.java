@@ -34,5 +34,4 @@ public class Order {
         this.modified_by = resultSet.getString("modified_by");
         this.active = resultSet.getBoolean("active");
     }
-
 }

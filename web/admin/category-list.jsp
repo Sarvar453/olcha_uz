@@ -218,8 +218,11 @@
             <label class="form-check-label">Sub category</label>
           </div>
           <div class="form-group parentId" style="display: none">
-            <label>Enter category's parent id</label>
-            <input class="form-control" name="parent_id" type="number" placeholder="Parent id">
+            <label class="form-check-label">Enter category</label>
+            <input type="hidden" name="parent_id" id="categoryId"/>
+            <select id="categorySelect" name="category" class="form-control" onclick="getCategoryListByFetch()">
+              <!-- Options will be added here dynamically -->
+            </select>
           </div>
           <div class="modal-footer primary-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -253,39 +256,7 @@
     </div>
   </div>
 </div>
-<!-- Optional Modal -->
-<div class="modal fade" id="updateCategoryModal" tabindex="-1" role="dialog" aria-labelledby="updateCategoryTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="updateCategoryTitle">Update category</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="update-category" method="post" style="display:inline;">
-          <input type="hidden" name="category-id" id="updateCategoryId"/>
-          <div class="form-group">
-            <input type="text" name="category-name" id="updateCategoryName" class="form-control"/>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input checkBox" type="checkbox" onchange="toggleCheckbox()">
-            <label class="form-check-label">Sub category</label>
-          </div>
-          <div class="form-group parentId" style="display: none">
-            <label>Enter category's parent id</label>
-            <input class="form-control" name="parent-id" id="updateCategoryParentId" type="number">
-          </div>
-          <div class="modal-footer primary-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <script src="js/category-list.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

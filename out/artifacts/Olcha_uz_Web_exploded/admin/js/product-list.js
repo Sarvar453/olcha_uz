@@ -13,28 +13,16 @@ function setUpdateProductParams(productId, productName, productPrice, productDes
 }
 
 function setOptionProductParams(productId, productDescription, productImages, productParams, productColor) {
-    document.getElementById('optionProductId').innerText = productId;
+    document.getElementById('optionProductId').value = productId;
     document.getElementById('optionProductDescription').innerText = productDescription;
 
-    // Parse the JSON strings safely
-    try {
-        const parsedImages = JSON.parse(productImages);
-        const parsedParams = JSON.parse(productParams);
-
-        // Format and display images and params as lists
-        document.getElementById('optionProductImages').innerHTML = formatJsonAsList(parsedImages);
-        document.getElementById('optionProductParams').innerHTML = formatJsonAsList(parsedParams);
-    } catch (error) {
-        console.error("Error parsing JSON:", error);
-        document.getElementById('optionProductImages').innerText = productImages;
-        document.getElementById('optionProductParams').innerText = productParams;
-    }
+    /*document.getElementById('optionProductImage').innerText = productImages;*/
+    document.getElementById('optionProductParams').innerText = productParams;
 
     document.getElementById('optionProductColor').innerText = productColor;
 }
 
 
-// Helper function to format JSON array as an HTML list
 function formatJsonAsList(jsonArray) {
     if (Array.isArray(jsonArray)) {
         let listHtml = "<ul>";
@@ -46,6 +34,79 @@ function formatJsonAsList(jsonArray) {
     }
     return "<p>Invalid JSON format</p>";
 }
+
+async function getCategoryListByFetch() {
+    const url = "http://localhost:8080/api/category/list";
+    const encodedUrl = encodeURI(url);
+    try {
+        const res = await fetch(encodedUrl);
+        render(await res.json());
+    } catch (error) {
+        console.error("Error occurred", error);
+    }
+}
+/*async function getProductListByFetch(){
+    const url = "http://localhost:8080/api/product/list"
+    const encodedUrl = encodeURI(url);
+    try {
+        const res = await fetch(encodedUrl);
+        category_render(await res.json());
+    } catch (error) {
+        console.error("Error occurred", error);
+    }
+}
+function product_render(){
+    let productId = document.getElementById("optionProductId");
+    let productDescription = document.getElementById("optionProductDescription");
+    let productImages = document.getElementById("optionProductImages");
+    let productParams = document.getElementById("optionProductParams");
+    let productColor = document.getElementById("optionProductColor");
+
+}*/
+function formatImages(images) {
+    if (Array.isArray(images)) {
+        let html = "<ul>";
+        images.forEach(image => {
+            html += `<li><strong>Name:</strong> ${image.name}, <strong>URL:</strong> <a href="${image.url}" target="_blank">${image.url}</a></li>`;
+        });
+        html += "</ul>";
+        return html;
+    }
+    return "<p>No images available.</p>";
+}
+
+function formatParams(params) {
+    if (Array.isArray(params)) {
+        let html = "<ul>";
+        params.forEach(param => {
+            html += `<li><strong>${param.name}:</strong> ${param.value}</li>`;
+        });
+        html += "</ul>";
+        return html;
+    }
+    return "<p>No parameters available.</p>";
+}
+function category_render(categoryList) {
+    let categorySelect = document.getElementById("categorySelect");
+
+    const selectedValue = categorySelect.value;
+
+    let options = "";
+    for (let i = 0; i < categoryList.length; i++) {
+        options += `<option value="${categoryList[i].id}" ${categoryList[i].id === selectedValue ? 'selected' : ''}>
+                       ${categoryList[i].name}
+                    </option>`;
+    }
+
+    categorySelect.innerHTML = options;
+
+    categorySelect.value = selectedValue;
+}
+document.getElementById("categorySelect").addEventListener("change", function() {
+    const selectedCategoryId = this.value;
+
+    document.getElementById("categoryId").value = selectedCategoryId;
+});
 
 
 
@@ -62,7 +123,7 @@ function populateFields(containerId, jsonData, type) {
         if (type === 'image') {
             div.innerHTML = `
                 <input type="text" class="image-input form-control" placeholder="Name" value="${item.name}">
-                <input type="text" class="image-input form-control" placeholder="URL" value="${item.url}">
+                <input type="file" class="image-input form-control" value="${item.url}">
             `;
         } else if (type === 'param') {
             div.innerHTML = `
@@ -83,7 +144,7 @@ function populateFields(containerId, jsonData, type) {
 
 
 
-function collectImages() {
+/*function collectImages() {
     let images = [];
     document.querySelectorAll('#imageGroupContainer .item-group').forEach(group => {
         images.push({
@@ -114,7 +175,7 @@ function collectColors() {
         });
     });
     return colors;
-}
+}*/
 
 function updateJsonData(type) {
     let dataArray = [];
@@ -189,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (type === 'image') {
             newFieldHTML = `
                 <input type="text" class="image-input form-control" placeholder="Name">
-                <input type="text" class="image-input form-control" placeholder="URL">
+                <input type="file" class="image-input form-control" accept="image/png, image/jpeg">
                 <button type="button" class="remove-param btn btn-danger"><i class="fa-solid fa-x"></i></button>
             `;
         } else if (type === 'param') {

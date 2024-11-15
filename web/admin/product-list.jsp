@@ -155,11 +155,9 @@
     .modal-body {
       padding: 20px;
     }
-
     .modal-footer .btn-secondary {
       background-color: #6c757d;
     }
-
     .modal-footer .btn-danger {
       background-color: #dc3545;
     }
@@ -270,14 +268,22 @@
             <label class="form-check-label">Enter to delivery</label>
             <input type="date" name="product-to_delivery" class="form-control" required/>
           </div>
+          <div class="form-group">
+            <label class="form-check-label">Enter category</label>
+            <input type="hidden" name="category-id" id="categoryId"/>
+            <select id="categorySelect" name="category" class="form-control" onclick="getCategoryListByFetch()">
+
+            </select>
+          </div>
+
           <!-- Image Section -->
           <div id="imageFormContainer" class="form-container">
             <div class="form-group">
               <label class="form-check-label">Add images</label>
               <div id="imageGroupContainer1" class="item-group">
                 <div class="item-block">
-                  <input type="text" class="image-input form-control" placeholder="Name">
-                  <input type="text" class="image-input form-control" placeholder="URL">
+                  <input type="text" class="image-input form-control" placeholder="Image name">
+                  <input type="file" class="image-input form-control" accept="image/png, image/jpeg">
                   <button type="button" class="remove-field btn btn-danger"><i class="fa-solid fa-x"></i></button>
                 </div>
               </div>
@@ -405,10 +411,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <p><strong>Description:</strong><span id="optionProductDescription"></span></p>
-        <p><strong>Images:</strong><span id="optionProductImages"></span></p>
-        <p><strong>Parameters:</strong><span id="optionProductParams"></span></p>
-        <p><strong>Color:</strong><span id="optionProductColor"></span></p>
+        <input type="hidden" name="product_id" id="optionProductId"/>
+        <p><strong>Description:</strong><br><span id="optionProductDescription"></span></p>
+        <p><strong>Images:</strong><br><span id="optionProductImages"></span></p>
+        <p><strong>Parameters:</strong><br><span id="optionProductParams"></span></p>
+        <p><strong>Color:</strong><br><span id="optionProductColor"></span></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -1,4 +1,4 @@
-package org.pdp.controllers;
+package org.pdp.auth;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

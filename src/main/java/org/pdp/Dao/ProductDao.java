@@ -12,7 +12,7 @@ public class ProductDao {
     private final PostgresDatabaseConfig postgresDatabaseConfig = new PostgresDatabaseConfig();
     private final DatabaseConfig databaseConfig;
     private static final String GET_PRODUCT_LIST = "select * from read_product()";
-    private static final String INSERT_PRODUCT = "select * from create_product(i_name := ?, i_price := ?, i_images := ?, i_params := ?, i_color := ?, i_description := ?, i_discount := ?, i_from_delivery := ?, i_to_delivery := ?, i_created_by := ?);";
+    private static final String INSERT_PRODUCT = "select * from create_product(i_category_id := ?,i_name := ?, i_price := ?, i_images := ?, i_params := ?, i_color := ?, i_description := ?, i_discount := ?, i_from_delivery := ?, i_to_delivery := ?, i_created_by := ?);";
     private static final String DELETE_PRODUCT = "select * from delete_product(i_id := ?)";
     private static final String UPDATE_PRODUCT = "select * from update_product(i_id := ?, i_name := ?, i_price := ?, i_images := ?, i_params := ?, i_color := ?, i_description := ?, i_discount := ?, i_from_delivery := ?, i_to_delivery := ?, i_modified_by := ?)";
 
@@ -67,16 +67,17 @@ public class ProductDao {
     public void addProduct(Product product) {
         try (Connection connect = databaseConfig.connect();
              PreparedStatement statement = connect.prepareStatement(INSERT_PRODUCT)) {
-            statement.setString(1, product.getName());
-            statement.setDouble(2, product.getPrice());
-            statement.setString(3, product.getImages());
-            statement.setString(4, product.getParams());
-            statement.setString(5, product.getColor());
-            statement.setString(6, product.getDescription());
-            statement.setInt(7, product.getDiscount());
-            statement.setString(8, product.getFromDelivery());
-            statement.setString(9, product.getToDelivery());
-            statement.setString(10, product.getCreatedBy());
+            statement.setInt(1, product.getCategoryId());
+            statement.setString(2, product.getName());
+            statement.setDouble(3, product.getPrice());
+            statement.setString(4, product.getImages());
+            statement.setString(5, product.getParams());
+            statement.setString(6, product.getColor());
+            statement.setString(7, product.getDescription());
+            statement.setInt(8, product.getDiscount());
+            statement.setString(9, product.getFromDelivery());
+            statement.setString(10, product.getToDelivery());
+            statement.setString(11, product.getCreatedBy());
             statement.executeQuery();
         } catch (Exception e) {
             e.printStackTrace();
