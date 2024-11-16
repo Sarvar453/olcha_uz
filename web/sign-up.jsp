@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 11/6/2024
-  Time: 11:36 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,7 +101,7 @@
         </div>
         <div class="form-group switch">
             <p>Already registered?</p>
-            <a href="/login"> Login</a>
+            <a href="/login">Login</a>
         </div>
     </form>
 </div>

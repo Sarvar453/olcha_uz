@@ -13,6 +13,9 @@ public class CategoryService {
         return categoryDao.getCategories();
     }
 
+    public List<Category> getChildCategories(Integer parentId){
+        return categoryDao.getChildList(parentId);
+    }
     public void addCategory(String parentIdParam, String categoryName, String createdBy) {
         Integer parentId = null;
         if (parentIdParam != null && !parentIdParam.isEmpty()) {

@@ -26,8 +26,21 @@ public class ProductRestController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        List<Product> productList = productService.getProductList();
+        List<Product> productList;
         resp.setContentType("text/json");
+        String categoryId = req.getParameter("categoryId");
+        if (categoryId != null) {
+            try {
+                int parsedId = Integer.parseInt(categoryId);
+                productList = productService.getProductListByCategoryId(parsedId);
+            } catch (NumberFormatException e) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().write("{\"error\": \"Invalid categoryId\"}");
+                return;
+            }
+        } else {
+            productList = productService.getProductList();
+        }
         PrintWriter writer = resp.getWriter();
         writer.println(objectMapper.writeValueAsString(productList));
     }

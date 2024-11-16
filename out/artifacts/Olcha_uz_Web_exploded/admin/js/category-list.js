@@ -30,28 +30,30 @@ function setUpdateCategoryParams(categoryId, categoryName, parentId) {
 
 async function getCategoryListByFetch() {
     const url = "http://localhost:8080/api/category/list";
-    const encodedUrl = encodeURI(url);  // URLni to'g'ri kodlash
+    const encodedUrl = encodeURI(url);
     try {
         const res = await fetch(encodedUrl);
         render(await res.json());
     } catch (error) {
-        console.error("Xato yuz berdi:", error);
+        console.error("Error occurred:", error);
     }
 }
 
 function render(categoryList) {
-    let categoryListDiv = document.getElementById("categoryList");
-    let temp = "";
+    let categorySelect = document.getElementById("categorySelect");
+    let parentId = document.getElementById("categoryId");
+    const selectedValue = categorySelect.value;
+    let options = "";
     for (let i = 0; i < categoryList.length; i++) {
-        temp += "<tr>" +
-            "<td>"+categoryList[i].id+"</td>" +
-            "<td>"+categoryList[i].name+"</td>" +
-            "<td>"+categoryList[i].parentId+"</td>" +
-            "<td>"+categoryList[i].createdAt+"</td>" +
-            "<td>"+categoryList[i].modifiedAt+"</td>" +
-            "<td>"+categoryList[i].createdBy+"</td>" +
-            "<td>"+categoryList[i].modifiedBy+"</td>" +
-            "</tr>";
+        options += `<option value="${categoryList[i].id}" ${categoryList[i].id === selectedValue ? 'selected' : ''}>
+                       ${categoryList[i].name}
+                    </option>`;
     }
-    categoryListDiv.innerHTML = temp;
+    categorySelect.innerHTML = options;
+    categorySelect.value = selectedValue;
+    parentId.value = selectedValue;
+    console.log(parentId.value);
 }
+categorySelect.addEventListener("change", function () {
+    parentId.value = categorySelect.value;
+});

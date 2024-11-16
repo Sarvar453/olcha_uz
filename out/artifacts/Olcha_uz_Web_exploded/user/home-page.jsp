@@ -13,22 +13,72 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="plugins/fontawesome-free-6.6.0-web/css/all.css">
+    <style>
+
+        ul {
+            background-color: #0069d9;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul li {
+            height: 60px;
+            width: 150px;
+            line-height: 60px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        ul li:hover {
+            background-color: yellow;
+            transition: 0.3s all linear;
+            color: red;
+            cursor: pointer;
+        }
+
+        ul li > ul {
+            position: absolute;
+            z-index: 999;
+            width: 100%;
+            left: 100%;
+            background-color: #6c757d;
+        }
+
+        li ul {
+            display: none;
+        }
+
+        li:hover > ul {
+            display: block;
+        }
+
+        ul li:first-child ul:first-child li ul {
+            left: 100%;
+            top: 0;
+        }
+        .grid-container{
+            display: grid;
+            grid-template-columns: auto auto auto;
+            margin-left: 100px;
+            gap: 25px !important;
+        }
+
+    </style>
 </head>
 <body>
 <main>
-    <div class="left-side">
-    <ul class="category-list" id="button-section">
+    <div id="categories">
 
-    </ul>
-</div>
+    </div>
     <div class="right-side">
-        <div class="grip-container sub-container">
-            <div class="grip-item product">
-                <img class="product-img" src="img/bestlaptops-2048px-9765.jpg" width="300px">
-                <p class="product-name">Laptop</p>
-                <p class="product-price">700$</p>
-                <a class="product-link" href="#">View</a>
-            </div>
+        <div class="grid-container sub-container" id="product-section">
+
         </div>
     </div>
 </main>

@@ -13,6 +13,7 @@ public class CategoryDao {
     private final PostgresDatabaseConfig postgresDatabaseConfig = new PostgresDatabaseConfig();
     private final DatabaseConfig databaseConfig;
     private static final String GET_CATEGORY_LIST = "select * from read_category()";
+    private static final String GET_SUB_CATEGORIES = "select * from read_category(i_parent_id := ?)";
     private static final String INSERT_CATEGORY = "select * from create_category(i_name := ?, i_parent_id := ?, i_created_by := ?)";
     private static final String DELETE_CATEGORY = "select * from delete_category(i_id := ?)";
     private static final String UPDATE_CATEGORY = "select * from update_category(i_id := ?, i_name := ?, i_parent_id := ?, i_updated_by := ?)";
@@ -35,7 +36,21 @@ public class CategoryDao {
         }
         return categories;
     }
-
+    public List<Category> getChildList(Integer parentId){
+        List<Category> categories = new ArrayList<>();
+        try (Connection connect = databaseConfig.connect()) {
+            PreparedStatement statement = connect.prepareStatement(GET_SUB_CATEGORIES);
+            statement.setInt(1, parentId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Category category = new Category(resultSet);
+                categories.add(category);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categories;
+    }
     public void deleteCategory(int categoryId) {
         try (Connection connection = postgresDatabaseConfig.connect()) {
             try (PreparedStatement statement = connection.prepareStatement(DELETE_CATEGORY)) {

@@ -33,7 +33,12 @@ public class LoginController extends HttpServlet {
             Context.setCurrentUser(user);
             req.setAttribute("userPermission", user.getPermission());
             addUsernameToCookie(resp, username);
-            resp.sendRedirect("/admin/category-list");
+            if(user.getRole().equals("USER")){
+                resp.sendRedirect("/user/home-page.jsp");
+            }
+            else{
+                resp.sendRedirect("/admin/category-list");
+            }
         } else {
             req.setAttribute("error", "Invalid username or password. Please try again.");
             RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");
@@ -43,7 +48,7 @@ public class LoginController extends HttpServlet {
 
     private void addUsernameToCookie(HttpServletResponse response, String username) {
         Cookie cookie = new Cookie("username", username);
-        cookie.setMaxAge(30);
+        cookie.setMaxAge(240);
         response.addCookie(cookie);
     }
 }

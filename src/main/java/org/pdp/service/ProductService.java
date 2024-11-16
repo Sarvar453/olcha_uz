@@ -1,21 +1,18 @@
 package org.pdp.service;
 
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import jakarta.servlet.http.Part;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.pdp.Dao.ProductDao;
 import org.pdp.entity.Product;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.lang.reflect.Type;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -23,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductDao productDao;
-    private static final String IMAGE_SAVE_DIRECTORY = "C:\\Users\\User\\Desktop\\Project\\Olcha.uz\\web\\images\\";
+    private static final String IMAGE_SAVE_DIRECTORY = "C:\\Users\\User\\Desktop\\New folder\\olcha_uz\\web\\user\\images\\";
 
     public List<Product> getProductList(){
         return productDao.getProducts();
@@ -45,31 +42,36 @@ public class ProductService {
         Product product = new Product(productName,productPrice,productImageJson,productParamJson,productColorJson,productDescription,discount,formattedFromDelivery,formattedToDelivery,productCreatedBy,categoryId);
         productDao.addProduct(product);
     }
-    public void addImageToFolder(String jsonData){
-        try {
-            JSONArray imagesArray = new JSONArray(jsonData);
+    public List<Product> getProductListByCategoryId(Integer categoryId){
+        return productDao.getProductsByCategory(categoryId);
+    }
 
-            for (int i = 0; i < imagesArray.length(); i++) {
-                JSONObject imageObject = imagesArray.getJSONObject(i);
-                String imageName = imageObject.getString("name");
-                String imagePath = imageObject.getString("url");
+    public void processImages(String productImagesJson, Part filePart) throws IOException {
+        Gson gson = new Gson();
+        Type imageListType = new TypeToken<List<ImageData>>(){}.getType();
+        List<ImageData> imageList = gson.fromJson(productImagesJson, imageListType);
 
-                // Define paths for source and target
-                Path sourcePath = Paths.get(imagePath);
-                Path targetPath = Paths.get(IMAGE_SAVE_DIRECTORY + imageName);
+        for (ImageData imageData : imageList) {
+            String fileNameFromJson = imageData.getName();
+            String fileExtension = imageData.getExtension();
 
-                // Copy the image file to the target directory
-                Files.copy(sourcePath, targetPath, StandardCopyOption.REPLACE_EXISTING);
+            if (fileExtension.isEmpty()) {
+                throw new IOException("Couldn't extract extension from file");
             }
 
-            System.out.println("All images saved successfully!");
-        } catch (IOException e) {
-            System.err.println("File I/O Error: " + e.getMessage());
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.err.println("Error processing JSON data: " + e.getMessage());
-            e.printStackTrace();
+            String newFileName = fileNameFromJson + "." + fileExtension;
+
+            String filePath = IMAGE_SAVE_DIRECTORY + newFileName;
+
+            filePart.write(filePath);
         }
+    }
+    private String getExtensionFromUrl(String url) {
+        int dotIndex = url.lastIndexOf(".");
+        if (dotIndex == -1) {
+            return null;
+        }
+        return url.substring(dotIndex + 1);
     }
     public void updateProduct(
                               Integer productId,
@@ -109,5 +111,16 @@ public class ProductService {
         SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = inputFormat.parse(dateStr);
         return outputFormat.format(date);
+    }
+}
+@Data
+class ImageData {
+    private String name;
+    private String url;
+
+    public String getExtension() {
+        String fileName = new File(url).getName();
+        int dotIndex = fileName.lastIndexOf(".");
+        return (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
     }
 }

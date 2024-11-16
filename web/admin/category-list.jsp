@@ -52,6 +52,9 @@
       margin-left: 10px;
       margin-top: 20px;
     }
+    .form-check{
+      margin-left: 5px;
+    }
     .switch-button{
       color: #fff;
       padding: 10px;
@@ -72,7 +75,6 @@
       margin-right: 20px;
       margin-left: 10px;
       margin-top: 10px;
-
     }
     .btn{
       width: 120px;

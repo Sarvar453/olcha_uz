@@ -112,7 +112,6 @@
       width: 40px;
       font-size: 14px;
     }
-
     .modal-body {
       max-height: 550px;
       overflow-y: auto;
@@ -121,13 +120,9 @@
       display: flex;
       flex-direction: column;
     }
-
     .form-check-label {
       margin-bottom: 5px;
     }
-
-
-
     .modal-header {
       background-color: #f8f9fa;
       border-bottom: 1px solid #dee2e6;
@@ -243,7 +238,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="add-product" method="post">
+        <form action="add-product" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <label class="form-check-label">Enter name</label>
             <input type="text" name="product-name" class="form-control" required/>
@@ -283,7 +278,7 @@
               <div id="imageGroupContainer1" class="item-group">
                 <div class="item-block">
                   <input type="text" class="image-input form-control" placeholder="Image name">
-                  <input type="file" class="image-input form-control" accept="image/png, image/jpeg">
+                  <input type="file" name="file" class="image-input form-control" accept="image/png, image/jpeg">
                   <button type="button" class="remove-field btn btn-danger"><i class="fa-solid fa-x"></i></button>
                 </div>
               </div>

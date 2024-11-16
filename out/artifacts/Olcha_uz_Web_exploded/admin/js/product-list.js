@@ -86,7 +86,7 @@ function formatParams(params) {
     }
     return "<p>No parameters available.</p>";
 }
-function category_render(categoryList) {
+function render(categoryList) {
     let categorySelect = document.getElementById("categorySelect");
 
     const selectedValue = categorySelect.value;

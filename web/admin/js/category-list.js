@@ -41,6 +41,7 @@ async function getCategoryListByFetch() {
 
 function render(categoryList) {
     let categorySelect = document.getElementById("categorySelect");
+    let parentId = document.getElementById("categoryId");
     const selectedValue = categorySelect.value;
     let options = "";
     for (let i = 0; i < categoryList.length; i++) {
@@ -50,4 +51,9 @@ function render(categoryList) {
     }
     categorySelect.innerHTML = options;
     categorySelect.value = selectedValue;
+    parentId.value = selectedValue;
+    console.log(parentId.value);
 }
+categorySelect.addEventListener("change", function () {
+    parentId.value = categorySelect.value;
+});

@@ -24,8 +24,23 @@ public class CategoryRestController extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        List<Category> categoryList = categoryService.getCategoryList();
+        List<Category> categoryList;
         resp.setContentType("text/json");
+        String parentIdParam = req.getParameter("parentId");
+
+        if (parentIdParam != null) {
+            try {
+                int parentId = Integer.parseInt(parentIdParam);
+                categoryList = categoryService.getChildCategories(parentId);
+            } catch (NumberFormatException e) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().write("{\"error\": \"Invalid parentId\"}");
+                return;
+            }
+        } else {
+            categoryList = categoryService.getCategoryList();
+        }
+
         PrintWriter writer = resp.getWriter();
         writer.println(objectMapper.writeValueAsString(categoryList));
     }
